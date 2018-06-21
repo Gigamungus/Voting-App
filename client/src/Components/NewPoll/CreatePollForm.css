@@ -1,0 +1,21 @@
+.create-poll-form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+.create-poll-form > * {
+    margin: 10px;
+}
+.poll-name {
+    width: 100%;
+    border-radius: 1000px;
+    border: none;
+    outline: none;
+    height: 30px;
+}
+.voting-options {
+    display: flex;
+    flex-direction: column;
+    width: 80%;
+}

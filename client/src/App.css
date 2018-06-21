@@ -1,0 +1,19 @@
+body {
+  background-color: #222222;
+}
+
+.App {
+  width: 80%;
+  margin: auto;
+}
+
+@media only screen and (min-width: 767px) {
+  .App {
+    width: 50%;
+    margin-top: 50px;
+  }
+}
+
+.red {
+  color: #E94B3C;
+}

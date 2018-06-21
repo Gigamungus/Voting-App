@@ -1,0 +1,31 @@
+.Button {
+    border: 2px solid #bbbbbb;
+    outline: none;
+    background-color: transparent;
+    color: white;
+    border-radius: 1000px;
+    padding: 10px;
+    width: 100%;
+    min-height: 30px;
+    text-transform: uppercase;
+    box-shadow: 0 5px #bbbbbb;
+}
+.Button:hover {
+    cursor: pointer;
+    position: relative;
+    top: 2px;
+    box-shadow: 0 3px #bbbbbb;
+}
+.Button:active {
+    position: relative;
+    top: 5px;
+    box-shadow: none;
+}
+.Button > * {
+    display: flex;
+    justify-content: center;
+}
+.Button i {
+    position: relative;
+    bottom: 3px;
+}
