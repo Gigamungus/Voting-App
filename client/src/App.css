@@ -5,6 +5,7 @@ body {
 .App {
   width: 80%;
   margin: auto;
+  margin-top: 20px;
 }
 
 @media only screen and (min-width: 767px) {
@@ -15,5 +16,5 @@ body {
 }
 
 .red {
-  color: #E94B3C;
+  color: #e94b3c;
 }

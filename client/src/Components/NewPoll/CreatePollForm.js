@@ -6,17 +6,9 @@ import Logo from "./../Logo/Logo";
 import Input from "../Input/Input";
 
 export default class CreatePollForm extends Component {
-  test(e) {
-    e.preventDefault();
-    const formData = new FormData(e.target);
-    console.log(formData);
-  }
   render() {
     return (
-      <form
-        className="create-poll-form"
-        action="/api/newpoll"
-      >
+      <form className="create-poll-form" action="api/newpoll" method="POST">
         <Input placeholder="Poll name" name="pollName" />
         <VotingOptions />
         <Button

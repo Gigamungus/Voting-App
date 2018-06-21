@@ -4,7 +4,9 @@
   "description": "application for generating and running polls",
   "main": "server.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start-react": "cd ./client && npm run start",
+    "server": "concurrently \"nodemon\" \"npm run start-react\" "
   },
   "repository": {
     "type": "git",
