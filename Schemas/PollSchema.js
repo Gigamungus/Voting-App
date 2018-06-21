@@ -12,7 +12,7 @@ const pollSchema = Schema({
     required: true,
     validate: [
       val => val.length > 0 && val.length <= 100,
-      "require 1-100 options"
+      "requires 1-100 options"
     ]
   },
   voters: {
