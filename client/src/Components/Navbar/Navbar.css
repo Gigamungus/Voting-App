@@ -1,0 +1,61 @@
+.Navbar {
+    background-color: #666666;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    padding-bottom: 15px;
+}
+
+.Navbar .links {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    width: 100%;
+    height: 100%;
+}
+
+.Navbar li {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    width: 100%;
+}
+
+.Navbar li a {
+    width: 100%;
+    height: 100%;
+    text-align: center;
+    padding: 20px 0;
+}
+
+.Navbar li:hover {
+    background-color: #444444;
+    cursor: pointer;
+}
+
+.Navbar .Input {
+    width: 30%;
+    margin-top: 20px;
+}
+
+@media only screen and (min-width: 768px) {
+    .Navbar {
+        flex-direction: row;
+        justify-content: space-between;
+        padding-bottom: 0;
+        padding-right: 2%;
+        width: 98vw;
+    }
+    .Navbar .links {
+        flex-direction: row;
+        width: 40%;
+    }
+    .Navbar .Input {
+        flex-shrink: 20;
+        margin-top: 0;
+    }
+}

@@ -8,7 +8,7 @@ const port = 5000;
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
-app.use(express.urlencoded());
+app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
 mongoose.connect(
@@ -17,8 +17,6 @@ mongoose.connect(
     console.log("connected to db");
   }
 );
-
-// app.get("/", )
 
 app.post("/api/newpoll", (req, res) => {
   console.log(req.body);

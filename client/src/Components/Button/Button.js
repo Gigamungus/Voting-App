@@ -1,22 +1,24 @@
-import React, { Component } from "react";
+import React from "react";
+import PropTypes from "prop-types";
 import "./Button.css";
 
-export default class Button extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      buttonType: this.props.type || "button"
-    };
-  }
-  render() {
-    return (
-      <button
-        className="Button"
-        onClick={this.props.function}
-        type={this.state.buttonType}
-      >
-        {this.props.text}
-      </button>
-    );
-  }
-}
+const Button = ({
+  type,
+  text,
+  onClick
+}) => {
+  // console.log(text);
+  return (
+    <button className="Button" onClick={onClick} type={type} value>
+      {text}
+    </button>
+  );
+};
+
+Button.propTypes = {
+  type: PropTypes.string,
+  text: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
+  onClick: PropTypes.func
+};
+
+export default Button;

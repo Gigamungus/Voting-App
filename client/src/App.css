@@ -1,15 +1,21 @@
-body {
+html, body {
   background-color: #222222;
+  font-family: Arial, Helvetica, sans-serif;
 }
 
-.App {
+a {
+  color: white;
+  text-decoration: none;
+}
+
+.container {
   width: 80%;
   margin: auto;
   margin-top: 20px;
 }
 
-@media only screen and (min-width: 767px) {
-  .App {
+@media only screen and (min-width: 768px) {
+  .container {
     width: 50%;
     margin-top: 50px;
   }
