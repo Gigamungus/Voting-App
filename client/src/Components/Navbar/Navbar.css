@@ -37,8 +37,12 @@
     cursor: pointer;
 }
 
+.Navbar form {
+    width: 80%;
+}
+
 .Navbar .Input {
-    width: 30%;
+    width: 50%;
     margin-top: 20px;
 }
 
@@ -49,6 +53,9 @@
         padding-bottom: 0;
         padding-right: 2%;
         width: 98vw;
+    }
+    .Navbar form {
+        width: 40%;
     }
     .Navbar .links {
         flex-direction: row;

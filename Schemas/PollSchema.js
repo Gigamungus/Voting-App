@@ -5,19 +5,28 @@ const Schema = mongoose.Schema;
 const pollSchema = Schema({
   name: {
     type: String,
-    required: true
+    required: true,
+    validate: {
+      validator: str => str.length > 0,
+      message: "must contain title"
+    }
   },
   options: {
     type: [String],
     required: true,
-    validate: [
-      val => val.length > 0 && val.length <= 100,
-      "requires 1-100 options"
-    ]
+    validate: {
+      validator: arr => arr.length > 1 && arr.length <= 100,
+      message: "must contain between 2 and 100 options"
+    }
   },
   voters: {
     type: [Schema.Types.ObjectId],
-    ref: "Voter"
+    ref: "Voter",
+    default: []
+  },
+  created: {
+    type: Date,
+    default: Date.now
   }
 });
 

@@ -2,7 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import "./Input.css";
 
-const Input = ({ placeholder, name, autoComplete, value }) => {
+const Input = ({ placeholder, name, autoComplete = "off", value }) => {
   return (
     <input
       className="Input"

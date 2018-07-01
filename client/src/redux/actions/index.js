@@ -1,4 +1,4 @@
-let nextOptionId = 1;
+let nextOptionId = 2;
 export const addOption = () => ({
   type: "ADD_OPTION",
   id: nextOptionId++
@@ -9,6 +9,7 @@ export const removeOption = id => ({
   id
 });
 
-export const resetPollForm = () => ({
-  type: "RESET_POLL_FORM"
+export const resetOptions = () => ({
+  type: "RESET_OPTIONS",
+  id: nextOptionId++
 });

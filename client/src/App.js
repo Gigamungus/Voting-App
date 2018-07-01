@@ -3,17 +3,22 @@ import "./App.css";
 import { Route } from "react-router-dom";
 import React, { Component } from "react";
 import Navbar from "./Components/Navbar/Navbar";
-import CreatePollForm from "./Components/NewPoll/CreatePollForm";
+import CreatePollContainer from "./Components/CreatePollBody/CreatePollContainer";
+import Login from "./Components/LoginBody/Login";
+import Signup from "./Components/SignupBody/Signup";
 
 class App extends Component {
   render() {
-    return <div className="App">
+    return (
+      <div className="App">
         <Navbar />
         <div className="container">
-          <Route exact path="/" component={CreatePollForm} />
-          {/* <Route exact path="/login" component={Login} /> */}
+          <Route exact path="/" component={CreatePollContainer} />
+          <Route exact path="/login" component={Login} />
+          <Route exact path="/signup" component={Signup}/>
         </div>
-      </div>;
+      </div>
+    );
   }
 }
 

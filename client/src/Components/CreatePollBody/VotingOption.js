@@ -2,7 +2,6 @@ import React from "react";
 import Input from "./../Input/Input";
 import Button from "./../Button/Button";
 import PropTypes from "prop-types";
-import "./VotingOption.css";
 
 const VotingOption = ({ id, removeSelf }) => {
   return (

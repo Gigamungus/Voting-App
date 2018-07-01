@@ -1,6 +1,6 @@
 import { connect } from "react-redux";
-import OptionList from "./OptionList";
-import { addOption, removeOption } from "./../../redux/actions";
+import CreatePollForm from "./CreatePollForm";
+import { addOption, removeOption, resetOptions } from "./../../redux/actions";
 
 const mapStateToProps = state => {
   // console.log(state);
@@ -11,10 +11,11 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => ({
   addOption: () => dispatch(addOption()),
-  removeOption: id => dispatch(removeOption(id))
+  removeOption: id => dispatch(removeOption(id)),
+  resetOptions: () => dispatch(resetOptions())
 });
 
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(OptionList);
+)(CreatePollForm);
