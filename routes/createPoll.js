@@ -12,7 +12,7 @@ const createPoll = (req, res) => {
     .save()
     .then(poll => {
 
-      res.redirect(`/polls/${poll._id}`);
+      res.redirect(`/polls?${poll._id}`);
     })
     .catch(err => res.json(err));
 };

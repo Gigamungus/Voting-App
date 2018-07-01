@@ -3,8 +3,13 @@
     grid-template-columns: auto 35px;
     grid-gap: 5px;
     width: 100%;
-    height: 25px;
+    /* height: 25px; */
     margin: 15px 0px;
+}
+
+.VotingOption .Button {
+    height: 33px;
+    width: 35px;
 }
 
 .create-poll-form {
@@ -20,9 +25,6 @@
 
 .new-poll-name {
     width: 100%;
-    border-radius: 1000px;
-    border: none;
-    outline: none;
     height: 30px;
 }
 

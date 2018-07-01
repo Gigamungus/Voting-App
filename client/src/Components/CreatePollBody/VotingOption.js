@@ -6,7 +6,11 @@ import PropTypes from "prop-types";
 const VotingOption = ({ id, removeSelf }) => {
   return (
     <div className="VotingOption">
-      <Input placeholder="Voting option" name="votingOption" autoComplete="off" />
+      <Input
+        placeholder="Voting option"
+        name="votingOption"
+        autoComplete="off"
+      />
       <Button
         text={
           <div>

@@ -10,7 +10,7 @@ const CreatePollForm = ({ options, addOption, removeOption, resetOptions }) => {
   // console.log(addOption);
   const resetForm = () => {
     resetOptions();
-    document.getElementsByClassName("new-poll-name")[0].children[0].value = "";
+    document.getElementsByClassName("new-poll-name")[0].children[0].children[0].value = "";
   };
   return (
     // <div className="VotingOptions">
@@ -20,7 +20,11 @@ const CreatePollForm = ({ options, addOption, removeOption, resetOptions }) => {
       method="POST"
     >
       <span className="new-poll-name">
-        <Input placeholder="Poll name" name="pollName" autoComplete="off" />
+        <Input
+          placeholder="Poll name"
+          name="pollName"
+          autoComplete="off"
+        />
       </span>
       {options.map(option => (
         <VotingOption

@@ -15,7 +15,7 @@ export default class Navbar extends Component {
             <Link to="/login">sign in</Link>
           </li>
         </ul>
-        <form action="">
+        <form className="poll-search" action="">
           <Input placeholder="find a poll" />
         </form>
       </div>
