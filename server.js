@@ -8,7 +8,8 @@ const port = 5000;
 //route functions
 const createPoll = require("./routes/createPoll");
 const getPoll = require("./routes/getPoll");
-const createUser = require("./routes/createUser")
+const createUser = require("./routes/createUser");
+const loginUser = require("./routes/loginUser");
 
 //middleware
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -41,6 +42,10 @@ app.get("/api/poll/:id", (req, res) => {
 
 app.post("/api/createuser", (req, res) => {
   createUser(req, res);
+});
+
+app.post("/api/login", (req, res) => {
+  loginUser(req, res);
 });
 
 app.listen(port, () => {
