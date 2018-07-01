@@ -12,7 +12,7 @@ export const removeOption = id => ({
 
 export const resetOptions = () => ({
   type: "RESET_OPTIONS",
-  id: nextOptionId++
+  id: nextOptionId += 2
 });
 
 //poll action creators
