@@ -17,11 +17,10 @@ const Input = ({
     <div className="Input">
       <input
         className="Input-input"
-        type="text"
+        type={type}
         placeholder={placeholder}
         name={name}
         autoComplete={autoComplete}
-        type={type}
         value={value}
       />
       <div style={errorStyle} className="red error-message">
