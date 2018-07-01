@@ -1,0 +1,14 @@
+.Login form .Input {
+    margin: 10px 0;
+}
+
+.Login .signup-link {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.Login .Button {
+    margin-bottom: 20px;
+}

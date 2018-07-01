@@ -7,6 +7,7 @@ const Input = ({
   name,
   autoComplete = "off",
   value,
+  type,
   errorMessage
 }) => {
   const errorStyle = {
@@ -20,6 +21,7 @@ const Input = ({
         placeholder={placeholder}
         name={name}
         autoComplete={autoComplete}
+        type={type}
         value={value}
       />
       <div style={errorStyle} className="red error-message">
@@ -34,6 +36,7 @@ Input.propTypes = {
   name: PropTypes.string,
   autoComplete: PropTypes.string,
   value: PropTypes.string,
+  type: PropTypes.string,
   errorMessage: PropTypes.string
 };
 

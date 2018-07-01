@@ -8,6 +8,10 @@ a {
   text-decoration: none;
 }
 
+a:hover {
+  text-decoration: underline;
+}
+
 .container {
   width: 80%;
   margin: auto;
