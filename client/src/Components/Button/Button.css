@@ -9,6 +9,7 @@
     min-height: 30px;
     text-transform: uppercase;
     box-shadow: 0 5px #bbbbbb;
+    word-wrap: break-word;
 }
 .Button:hover {
     cursor: pointer;

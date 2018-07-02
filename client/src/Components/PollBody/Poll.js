@@ -1,6 +1,8 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import LoadSpinner from "../LoadSpinner/LoadSpinner";
+import "./Poll.css";
+import Button from "../Button/Button";
 
 class Poll extends Component {
   getPollIfNeeded() {
@@ -15,14 +17,17 @@ class Poll extends Component {
     // console.log(this.props.poll.poll.options)
 
     const renderThis =
-      this.props.poll.loaded === true ? (
-        <div>
-          <p>{this.props.poll.poll.name}</p>
+      this.props.poll.loaded === true ? ( //rednering this if poll is loaded successfully
+        <div className="Poll">
+          <p className="poll-name">{this.props.poll.poll.name}</p>
           {this.props.poll.poll.options.map((option, index) => (
-            <p key={index}>{option}</p>
+            <div className="poll-option">
+              <Button key={index} text={option} />
+            </div>
           ))}
         </div>
       ) : (
+        //rendering this if poll not yet loaded
         <LoadSpinner />
       );
 

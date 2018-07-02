@@ -24,7 +24,7 @@ class Polls extends Component {
     // console.log(this.props);
     let renderThis = "test";
 
-    if (this.props.polls.loading === true) renderThis = <LoadSpinner />;
+    if (this.props.polls.loading === true) return <LoadSpinner />;
     else if (this.props.polls.loaded === true) {
       let polls = this.props.polls.polls;
       if (polls.length === 0) renderThis = "no results found";
