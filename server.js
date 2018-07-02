@@ -8,6 +8,7 @@ const port = 5000;
 //route functions
 const createPoll = require("./routes/createPoll");
 const getPoll = require("./routes/getPoll");
+const getPolls = require("./routes/getPolls");
 const createUser = require("./routes/createUser");
 const loginUser = require("./routes/loginUser");
 
@@ -35,15 +36,20 @@ app.post("/api/newpoll", (req, res) => {
 });
 
 //public route for retrieving information on a single poll
-//
 app.get("/api/poll/:id", (req, res) => {
   getPoll(req, res);
 });
 
+app.get("/api/polls/:name", (req, res) => {
+  getPolls(req, res);
+});
+
+//public route for creating a user
 app.post("/api/createuser", (req, res) => {
   createUser(req, res);
 });
 
+//public route for logging a user in
 app.post("/api/login", (req, res) => {
   loginUser(req, res);
 });

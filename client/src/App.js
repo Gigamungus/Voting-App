@@ -7,6 +7,7 @@ import CreatePollContainer from "./Components/CreatePollBody/CreatePollContainer
 import Login from "./Components/LoginBody/Login";
 import Signup from "./Components/SignupBody/Signup";
 import PollContainer from "./Components/PollBody/PollContainer";
+import PollsContainer from "./Components/PollsBody/PollsContainer";
 
 class App extends Component {
   render() {
@@ -18,6 +19,7 @@ class App extends Component {
           <Route exact path="/login" component={Login} />
           <Route exact path="/signup" component={Signup} />
           <Route path="/polls" component={PollContainer} />
+          <Route path="/findpolls" component={PollsContainer} />
         </div>
       </div>
     );

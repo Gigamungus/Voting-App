@@ -1,28 +1,29 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
+import LoadSpinner from "../LoadSpinner/LoadSpinner";
 
 class Poll extends Component {
   getPollIfNeeded() {
     const id = this.props.location.search.split("?")[1];
     // console.log(id)
-    if (this.props.polls.loading === false && this.props.polls.loaded === false)
+    if (this.props.poll.loading === false && this.props.poll.loaded === false)
       this.props.fetchPoll(id);
   }
   render() {
     // console.log(this.props);
     this.getPollIfNeeded();
-    // console.log(this.props.polls.poll.options)
+    // console.log(this.props.poll.poll.options)
 
     const renderThis =
-      this.props.polls.loaded === true ? (
+      this.props.poll.loaded === true ? (
         <div>
-          <p>{this.props.polls.poll.name}</p>
-          {this.props.polls.poll.options.map((option, index) => (
+          <p>{this.props.poll.poll.name}</p>
+          {this.props.poll.poll.options.map((option, index) => (
             <p key={index}>{option}</p>
           ))}
         </div>
       ) : (
-        <div>loading</div>
+        <LoadSpinner />
       );
 
     return <div>{renderThis}</div>;
@@ -31,7 +32,7 @@ class Poll extends Component {
 
 Poll.propTypes = {
   location: PropTypes.object.isRequired,
-  polls: PropTypes.object.isRequired,
+  poll: PropTypes.object.isRequired,
   fetchPoll: PropTypes.func.isRequired
 };
 

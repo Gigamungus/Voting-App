@@ -1,33 +1,28 @@
-const poll = (
+const polls = (
   state = {
     loading: false,
     loaded: false,
-    poll: {},
-    err: false
+    name: undefined,
+    polls: []
   },
   action
 ) => {
   switch (action.type) {
-    case "GET_POLL_REQUEST":
-      //   console.log("get_poll_request");
-      return Object.assign({}, state, { loading: true, loaded: false });
-    case "GET_POLL_RESPONSE":
-      console.log("get_poll_response");
+    case "GET_POLLS_REQUEST":
+      return Object.assign({}, state, {
+        loading: true,
+        loaded: false,
+        name: action.name
+      });
+    case "GET_POLLS_RESPONSE":
       return Object.assign({}, state, {
         loading: false,
         loaded: true,
-        poll: action.poll
-      });
-    case "GET_POLL_ERROR":
-      console.log("get_poll_error");
-      return Object.assign({}, state, {
-        loading: false,
-        loaded: false,
-        err: action.err
+        polls: action.polls
       });
     default:
       return state;
   }
 };
 
-export default poll;
+export default polls;

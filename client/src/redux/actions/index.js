@@ -12,10 +12,10 @@ export const removeOption = id => ({
 
 export const resetOptions = () => ({
   type: "RESET_OPTIONS",
-  id: nextOptionId += 10
+  id: (nextOptionId += 10)
 });
 
-//poll action creators
+//single poll action creators
 export const getPollRequest = id => ({
   type: "GET_POLL_REQUEST",
   id
@@ -39,12 +39,33 @@ export const fetchPoll = id => {
         res => {
           // console.log(res);
           return res.json();
-        },
+        }
         // error => {console.log(error)}
       )
       .then(poll => {
         // console.log(poll);
         dispatch(getPollResponse(poll));
       });
+  };
+};
+
+// multiple polls action creators
+
+export const getPollsRequest = name => ({
+  type: "GET_POLLS_REQUEST",
+  name
+});
+
+export const getPollsResponse = polls => ({
+  type: "GET_POLLS_RESPONSE",
+  polls
+});
+
+export const getPolls = name => {
+  return dispatch => {
+    dispatch(getPollsRequest(name));
+    return fetch(`http://localhost:5000/api/polls/${name}`)
+      .then(polls => polls.json())
+      .then(polls => dispatch(getPollsResponse(polls)));
   };
 };

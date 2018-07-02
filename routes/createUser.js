@@ -2,7 +2,8 @@ const Voter = require("./../Schemas/VoterSchema");
 const bcrypt = require("bcryptjs");
 
 const createUser = (req, res) => {
-  Voter.findOne({ username: req.body.username }).exec((err, voter) => {
+    console.log(req.params.namelike);
+  Voter.findOne({ username: req.params.namelike }).exec((err, voter) => {
     if (err) res.send(err);
     else if (voter) res.send("username taken");
     else {

@@ -1,13 +1,13 @@
 import { connect } from "react-redux";
-import Poll from "./Poll";
-import { fetchPoll } from "./../../redux/actions";
+import Poll from "./Polls";
+import { getPolls } from "./../../redux/actions";
 
 const mapStateToProps = state => ({
-  poll: state.poll
+  polls: state.polls
 });
 
 const mapDispatchToProps = dispatch => ({
-  fetchPoll: id => dispatch(fetchPoll(id))
+  getPolls: name => dispatch(getPolls(name))
 });
 
 export default connect(
