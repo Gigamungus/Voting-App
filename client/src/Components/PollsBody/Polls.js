@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import PollThumbNail from "./PollThumbNail";
 import LoadSpinner from "../LoadSpinner/LoadSpinner";
+import "./PollThumbNail.css";
 
 class Polls extends Component {
   getPollsIfNeeded() {
@@ -34,7 +35,7 @@ class Polls extends Component {
       }
     }
 
-    return <div>{renderThis}</div>;
+    return <div className="Polls">{renderThis}</div>;
   }
 }
 

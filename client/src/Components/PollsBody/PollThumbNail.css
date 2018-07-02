@@ -1,0 +1,48 @@
+.Polls {
+    display: grid;
+    grid-template-columns: 100%;
+}
+
+@media only screen and (min-width: 768px) {
+    .Polls {
+        grid-template-columns: 50% 50%;
+    }
+}
+
+@media only screen and (min-width: 1024px) {
+    .Polls {
+        grid-template-columns: 33.3% 33.3% 33.3%;
+    }
+}
+
+.Polls a {
+    text-decoration: none !important;
+}
+
+.PollThumbNail {
+    margin: 10px;
+    padding: 10px;
+    border-radius: 5px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-color: #cccccc;
+    color: #333333;
+    max-height: 2000px;
+}
+
+.PollThumbNail .thumbnail-title {
+    font-size: 20px;
+}
+
+.PollThumbNail .thumbnail-option {
+    max-width: 100%;
+    color: brown;
+    width: 100%;
+    text-align: center;
+    margin: 10px 0;
+    padding-bottom: 2px;
+    border-bottom: 2px solid black;
+    word-wrap: break-word;
+}

@@ -4,6 +4,7 @@
     border: solid 4px #444444;
     border-top: solid 5px steelblue;
     border-radius: 5000px;
+    margin: auto;
     animation: spin 2s linear infinite;
 }
 
