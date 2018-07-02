@@ -1,26 +1,17 @@
 import "./cssreset.css";
 import "./App.css";
-import { Route } from "react-router-dom";
 import React, { Component } from "react";
 import Navbar from "./Components/Navbar/Navbar";
-import CreatePollContainer from "./Components/CreatePollBody/CreatePollContainer";
-import Login from "./Components/LoginBody/Login";
-import Signup from "./Components/SignupBody/Signup";
-import PollContainer from "./Components/PollBody/PollContainer";
-import PollsContainer from "./Components/PollsBody/PollsContainer";
+import Footer from "./Components/Footer/Footer";
+import Container from "./Components/Container/Container";
 
 class App extends Component {
   render() {
     return (
       <div className="App">
         <Navbar />
-        <div className="container">
-          <Route exact path="/" component={CreatePollContainer} />
-          <Route exact path="/login" component={Login} />
-          <Route exact path="/signup" component={Signup} />
-          <Route path="/polls" component={PollContainer} />
-          <Route path="/findpolls" component={PollsContainer} />
-        </div>
+        <Container />
+        <Footer />
       </div>
     );
   }
