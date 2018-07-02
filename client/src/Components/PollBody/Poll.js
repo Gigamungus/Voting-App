@@ -3,6 +3,8 @@ import PropTypes from "prop-types";
 import LoadSpinner from "../LoadSpinner/LoadSpinner";
 import "./Poll.css";
 import Button from "../Button/Button";
+import CopyToClipBoard from "../CopyToClipBoard/CopyToClipBoard";
+// import { host } from "./../../../../config";
 
 class Poll extends Component {
   getPollIfNeeded() {
@@ -15,12 +17,13 @@ class Poll extends Component {
     this.props.poll.loaded = false;
   }
   render() {
+    // console.log(window.location);
     // console.log(this.props);
     this.getPollIfNeeded();
     // console.log(this.props.poll.poll.options)
-
+    // console.log(this.props.location);
     const renderThis =
-      this.props.poll.loaded === true ? ( //rednering this if poll is loaded successfully
+      this.props.poll.loaded === true ? (
         <div className="Poll">
           <p className="poll-name">{this.props.poll.poll.name}</p>
           {this.props.poll.poll.options.map((option, index) => (
@@ -28,12 +31,14 @@ class Poll extends Component {
               <Button text={option} />
             </div>
           ))}
-        </div>
+          <div className="spread-poll">
+            <span>copy URL to clipboard</span>
+            <CopyToClipBoard text={window.location.href} />
+          </div>
+        </div> //rendering this if poll not yet loaded
       ) : (
-        //rendering this if poll not yet loaded
         <LoadSpinner />
       );
-
     return <div>{renderThis}</div>;
   }
 }
