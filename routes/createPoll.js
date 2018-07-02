@@ -2,7 +2,11 @@ const Poll = require("./../Schemas/PollSchema");
 
 const createPoll = (req, res) => {
   let options =
-    typeof req.body.votingOption === "object" ? req.body.votingOption.filter(option => option) : [];
+    typeof req.body.votingOption === "object"
+      ? req.body.votingOption.filter(option => option).map(option => ({
+          name: option
+        }))
+      : [];
 
   let newPoll = new Poll({
     name: req.body.pollName,
@@ -11,7 +15,6 @@ const createPoll = (req, res) => {
   newPoll
     .save()
     .then(poll => {
-
       res.redirect(`/polls?${poll._id}`);
     })
     .catch(err => res.json(err));

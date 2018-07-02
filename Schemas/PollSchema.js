@@ -12,7 +12,23 @@ const pollSchema = Schema({
     }
   },
   options: {
-    type: [String],
+    type: [
+      {
+        name: {
+          type: String,
+          required: true
+        },
+        voters: {
+          type: [Schema.Types.ObjectId],
+          ref: "voters",
+          default: []
+        },
+        count: {
+          type: Number,
+          default: 0
+        }
+      }
+    ],
     required: true,
     validate: {
       validator: arr => arr.length > 1 && arr.length <= 100,
@@ -21,7 +37,7 @@ const pollSchema = Schema({
   },
   voters: {
     type: [Schema.Types.ObjectId],
-    ref: "Voter",
+    ref: "voters",
     default: []
   },
   created: {

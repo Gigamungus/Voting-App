@@ -28,7 +28,7 @@ class Poll extends Component {
           <p className="poll-name">{this.props.poll.poll.name}</p>
           {this.props.poll.poll.options.map((option, index) => (
             <div key={index} className="poll-option">
-              <Button text={option} />
+              <Button text={option.name} />
             </div>
           ))}
           <div className="spread-poll">

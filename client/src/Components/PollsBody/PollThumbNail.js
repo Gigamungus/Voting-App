@@ -4,13 +4,13 @@ import { Link } from "react-router-dom";
 import "./PollThumbNail.css";
 
 const PollThumbNail = ({ poll }) => {
-  //   console.log(poll);
+    // console.log(poll);
   return (
     <Link to={`/polls?${poll._id}`}>
       <div className="PollThumbNail">
         <div className="thumbnail-title">{poll.name}</div>
-        <div className="thumbnail-option truncate">{poll.options[0]}</div>
-        <div className="thumbnail-option truncate">{poll.options[1]}</div>
+        <div className="thumbnail-option truncate">{poll.options[0].name}</div>
+        <div className="thumbnail-option truncate">{poll.options[1].name}</div>
       </div>
     </Link>
   );
