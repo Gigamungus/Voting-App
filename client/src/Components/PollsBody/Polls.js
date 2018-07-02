@@ -20,7 +20,7 @@ class Polls extends Component {
     // console.log(this.props);
     this.getPollsIfNeeded();
     // console.log(name);
-    console.log(this.props);
+    // console.log(this.props);
     let renderThis = "test";
 
     if (this.props.polls.loading === true) renderThis = <LoadSpinner />;

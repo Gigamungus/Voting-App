@@ -2,7 +2,7 @@ import React from "react";
 import "./LoadSpinner.css";
 
 const LoadSpinner = () => {
-  return <div>loading</div>;
+  return <div className="LoadSpinner"></div>;
 };
 
 export default LoadSpinner;

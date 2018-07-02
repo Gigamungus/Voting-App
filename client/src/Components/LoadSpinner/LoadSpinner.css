@@ -1,0 +1,17 @@
+.LoadSpinner {
+    height: 30px;
+    width: 30px;
+    border: solid 4px #444444;
+    border-top: solid 5px steelblue;
+    border-radius: 5000px;
+    animation: spin 2s linear infinite;
+}
+
+@keyframes spin {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg)
+    }
+}
