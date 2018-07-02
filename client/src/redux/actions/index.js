@@ -50,7 +50,6 @@ export const fetchPoll = id => {
 };
 
 // multiple polls action creators
-
 export const getPollsRequest = name => ({
   type: "GET_POLLS_REQUEST",
   name

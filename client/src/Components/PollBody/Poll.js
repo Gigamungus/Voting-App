@@ -7,9 +7,12 @@ import Button from "../Button/Button";
 class Poll extends Component {
   getPollIfNeeded() {
     const id = this.props.location.search.split("?")[1];
-    // console.log(id)
+    // console.log(id, this.props.poll.loading, this.props.poll.loaded);
     if (this.props.poll.loading === false && this.props.poll.loaded === false)
       this.props.fetchPoll(id);
+  }
+  componentWillMount() {
+    this.props.poll.loaded = false;
   }
   render() {
     // console.log(this.props);
@@ -21,8 +24,8 @@ class Poll extends Component {
         <div className="Poll">
           <p className="poll-name">{this.props.poll.poll.name}</p>
           {this.props.poll.poll.options.map((option, index) => (
-            <div className="poll-option">
-              <Button key={index} text={option} />
+            <div key={index} className="poll-option">
+              <Button text={option} />
             </div>
           ))}
         </div>
