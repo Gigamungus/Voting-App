@@ -15,6 +15,7 @@ class Poll extends Component {
   }
   castVote(id) {
     return () => {
+      // store.getState();
       this.props.sendVote(id);
     };
   }

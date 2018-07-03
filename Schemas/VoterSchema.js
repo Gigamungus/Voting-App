@@ -16,7 +16,11 @@ const voterSchema = Schema({
     type: String,
     required: true
   },
-  polls: {
+  votedPolls: {
+    type: [{ type: Schema.Types.ObjectId, ref: "polls" }],
+    default: []
+  },
+  createdPolls: {
     type: [{ type: Schema.Types.ObjectId, ref: "polls" }],
     default: []
   }

@@ -43,6 +43,11 @@ const pollSchema = Schema({
   created: {
     type: Date,
     default: Date.now
+  },
+  createdBy: {
+    type: Schema.Types.ObjectId,
+    ref: "voters",
+    default: undefined
   }
 });
 
