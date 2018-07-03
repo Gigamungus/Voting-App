@@ -1,3 +1,5 @@
+//used for holding options whilst creating a new poll
+
 const options = (
   state = [
     {

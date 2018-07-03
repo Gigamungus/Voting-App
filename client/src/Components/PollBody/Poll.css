@@ -23,6 +23,10 @@
     margin: 10px 0;
     width: 80%;
     text-align: center;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
 }
 
 .Poll .spread-poll {

@@ -49,6 +49,26 @@ export const fetchPoll = id => {
   };
 };
 
+//voting acion creators
+export const sendVoteRequest = id => ({
+  type: "SEND_VOTE_REQUEST",
+  id
+});
+
+export const voted = data => ({
+  type: "VOTED",
+  data
+});
+
+export const sendVote = id => {
+  return dispatch => {
+    dispatch(sendVoteRequest(id));
+    return fetch(`http://localhost:5000/api/vote/${id}`, { method: "POST" })
+      .then(response => response.json())
+      .then(data => dispatch(voted(data)));
+  };
+};
+
 // multiple polls action creators
 export const getPollsRequest = name => ({
   type: "GET_POLLS_REQUEST",

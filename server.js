@@ -11,6 +11,7 @@ const getPoll = require("./routes/getPoll");
 const getPolls = require("./routes/getPolls");
 const createUser = require("./routes/createUser");
 const loginUser = require("./routes/loginUser");
+const vote = require("./routes/vote");
 
 //middleware
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -52,6 +53,11 @@ app.post("/api/createuser", (req, res) => {
 //public route for logging a user in
 app.post("/api/login", (req, res) => {
   loginUser(req, res);
+});
+
+//temp route for posting a vote
+app.post("/api/vote/:optionId", (req, res) => {
+  vote(req, res);
 });
 
 app.listen(port, () => {

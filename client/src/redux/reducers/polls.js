@@ -1,3 +1,5 @@
+//used for tracking multiple polls, useful for generating a list of polls
+
 const polls = (
   state = {
     loading: false,
