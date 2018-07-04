@@ -1,7 +1,7 @@
 import React from "react";
 import { Route } from "react-router-dom";
 import CreatePollContainer from "./../CreatePollBody/CreatePollContainer";
-import Login from "./../LoginBody/Login";
+import LoginContainer from "./../LoginBody/LoginContainer";
 import Signup from "./../SignupBody/Signup";
 import PollContainer from "./../PollBody/PollContainer";
 import PollsContainer from "./../PollsBody/PollsContainer";
@@ -12,7 +12,7 @@ const Container = () => {
     <div>
       <div className="container">
         <Route exact path="/" component={CreatePollContainer} />
-        <Route exact path="/login" component={Login} />
+        <Route exact path="/login" component={LoginContainer} />
         <Route exact path="/signup" component={Signup} />
         <Route path="/polls" component={PollContainer} />
         <Route path="/findpolls" component={PollsContainer} />

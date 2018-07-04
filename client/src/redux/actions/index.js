@@ -88,3 +88,47 @@ export const getPolls = name => {
       .then(polls => dispatch(getPollsResponse(polls)));
   };
 };
+
+//login action creators
+export const signinRequest = () => ({
+  type: "SIGNIN_REQUEST"
+});
+
+export const signinSuccess = jwt => ({
+  type: "SIGNIN_SUCCESS",
+  jwt
+});
+
+export const signinFail = err => ({
+  type: "SIGNIN_FAIL",
+  err
+});
+
+export const signin = (username, password) => {
+  return dispatch => {
+    dispatch(signinRequest());
+    return fetch("http://localhost:5000/api/login", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ username, password })
+    })
+      .then(res => {
+        // console.log(res);
+        return res.json();
+      })
+      .then(data => {
+        // console.log(data)
+        data.error ? dispatch(signinFail(data)) : dispatch(signinSuccess(data));
+      });
+  };
+};
+
+export const usernameInput = e => ({
+  type: "USERNAME_INPUT",
+  input: e.target.value
+});
+
+export const passwordInput = e => ({
+  type: "PASSWORD_INPUT",
+  input: e.target.value
+});

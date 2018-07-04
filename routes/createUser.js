@@ -2,20 +2,29 @@ const Voter = require("./../Schemas/VoterSchema");
 const bcrypt = require("bcryptjs");
 
 const createUser = (req, res) => {
-    console.log(req.params.namelike);
-  Voter.findOne({ username: req.params.namelike }).exec((err, voter) => {
+  let error = {};
+  //   console.log(req.body.username);
+  Voter.findOne({ username: req.body.username }).exec((err, voter) => {
     if (err) res.send(err);
-    else if (voter) res.send("username taken");
-    else {
-      const salt = bcrypt.genSalt(10, (err, salt) => {
-        if (err) console.log(err);
+    else if (voter) {
+      error.userName = "username taken";
+      res.json(error);
+    } else {
+      bcrypt.genSalt(10, (err, salt) => {
+        if (err) res.send(err);
         else
           bcrypt.hash(req.body.password, salt, (err, hash) => {
-            if (err) console.log(err);
-            else Voter.create({ username: req.body.username, password: hash });
+            if (err) res.send(err);
+            else
+              Voter.create(
+                { username: req.body.username, password: hash },
+                (err, doc) => {
+                  if (err) res.send(err);
+                  else res.json(doc);
+                }
+              );
           });
       });
-      res.redirect("/login");
     }
   });
 };

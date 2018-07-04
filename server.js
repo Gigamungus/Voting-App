@@ -2,8 +2,13 @@ const express = require("express");
 const app = express();
 const mongoose = require("mongoose");
 const secrets = require("./config/passwords");
+const authStrat = require("./auth_strategies/jwt-strat");
 const bodyParser = require("body-parser");
+const passport = require("passport");
+const cors = require("cors");
 const port = 5000;
+
+app.use(cors());
 
 //route functions
 const createPoll = require("./routes/createPoll");
@@ -13,12 +18,16 @@ const createUser = require("./routes/createUser");
 const loginUser = require("./routes/loginUser");
 const vote = require("./routes/vote");
 
-//middleware
+//body middleware
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
-
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
+
+//authentication middleware
+app.use(passport.initialize());
+app.use(passport.session());
+passport.use(authStrat);
 
 //database
 mongoose.connect(
@@ -52,13 +61,18 @@ app.post("/api/createuser", (req, res) => {
 
 //public route for logging a user in
 app.post("/api/login", (req, res) => {
+  // console.log("here");
   loginUser(req, res);
 });
 
 //temp route for posting a vote
-app.post("/api/vote/:optionId", (req, res) => {
-  vote(req, res);
-});
+app.post(
+  "/api/vote/:optionId",
+  passport.authenticate("jwt", { session: false }),
+  (req, res) => {
+    vote(req, res);
+  }
+);
 
 app.listen(port, () => {
   console.log(`serving app on port ${port}`);

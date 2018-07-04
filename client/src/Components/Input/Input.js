@@ -8,7 +8,8 @@ const Input = ({
   autoComplete = "off",
   value,
   type,
-  errorMessage
+  errorMessage,
+  onChange
 }) => {
   const errorStyle = {
     display: errorMessage ? "block" : "none"
@@ -22,6 +23,7 @@ const Input = ({
         name={name}
         autoComplete={autoComplete}
         value={value}
+        onChange={onChange}
       />
       <div style={errorStyle} className="red error-message">
         {errorMessage}
@@ -36,7 +38,8 @@ Input.propTypes = {
   autoComplete: PropTypes.string,
   value: PropTypes.string,
   type: PropTypes.string,
-  errorMessage: PropTypes.string
+  errorMessage: PropTypes.string,
+  onChange: PropTypes.func
 };
 
 export default Input;
