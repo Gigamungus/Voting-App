@@ -9,6 +9,7 @@ opts.secretOrKey = secret;
 
 module.exports = strat = new JwtStrategy(opts, (jwt_payload, done) => {
   // console.log(jwt_payload);
+  // console.log(done);
   Voter.findById(jwt_payload._id, (err, voter) => {
     // console.log("running");
     if (err) {

@@ -63,9 +63,16 @@ export const voted = data => ({
 export const sendVote = (id, jwt) => {
   return dispatch => {
     dispatch(sendVoteRequest(id));
-    return fetch(`http://localhost:5000/api/vote/${id}`, { method: "POST", headers: {Authorization: `bearer ${jwt}`} })
+    return fetch(`http://localhost:5000/api/vote/${id}`, {
+      method: "POST",
+      headers: { Authorization: `bearer ${jwt}` }
+    })
       .then(response => response.json())
-      .then(data => dispatch(voted(data)));
+      .then(data => {
+        console.log(data);
+        
+        dispatch(voted(data));
+      });
   };
 };
 

@@ -7,7 +7,8 @@ const poll = (
     loadingVote: false,
     loadedVote: false,
     poll: {},
-    err: false
+    err: false,
+    userVoted: false
   },
   action
 ) => {
@@ -36,7 +37,11 @@ const poll = (
       return Object.assign({}, state, { loadingVote: true });
 
     case "VOTED":
-      return Object.assign({}, state, { loadingVote: false, loadedVote: true, poll: action.data });
+      return Object.assign({}, state, {
+        loadingVote: false,
+        loadedVote: true,
+        poll: action.data
+      });
 
     default:
       return state;

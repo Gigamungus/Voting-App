@@ -17,7 +17,7 @@ class Poll extends Component {
   castVote(id) {
     return () => {
       // store.getState();
-      console.log(this.props.user);
+      // console.log(this.props.user);
       this.props.sendVote(id, this.props.user.jwt);
     };
   }
@@ -33,8 +33,13 @@ class Poll extends Component {
     this.getPollIfNeeded();
     // console.log(this.props.poll.poll.options);
     // console.log(this.props.location);
-    const loginReq = this.props.user.signedIn ? (
-      ""
+
+    const userNotes = this.props.user.signedIn ? (
+      this.props.poll.userVoted ? (
+        <p>you have voted on this poll</p>
+      ) : (
+        ""
+      )
     ) : (
       <p style={{ textAlign: "center" }}>
         you must be{" "}
@@ -44,10 +49,11 @@ class Poll extends Component {
         to vote on this poll
       </p>
     );
+
     const renderThis =
       this.props.poll.loaded === true ? (
         <div className="Poll">
-          {loginReq}
+          {userNotes}
           <p className="poll-name">{this.props.poll.poll.name}</p>
           {this.props.poll.poll.options.map((option, index) => {
             /* console.log(option); */
