@@ -3,12 +3,13 @@ import Poll from "./Poll";
 import { fetchPoll, sendVote } from "./../../redux/actions";
 
 const mapStateToProps = state => ({
-  poll: state.poll
+  poll: state.poll,
+  user: state.user
 });
 
 const mapDispatchToProps = dispatch => ({
   fetchPoll: id => dispatch(fetchPoll(id)),
-  sendVote: optionId => dispatch(sendVote(optionId))
+  sendVote: (optionId, jwt) => dispatch(sendVote(optionId, jwt))
 });
 
 export default connect(

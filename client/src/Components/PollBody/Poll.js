@@ -16,7 +16,8 @@ class Poll extends Component {
   castVote(id) {
     return () => {
       // store.getState();
-      this.props.sendVote(id);
+      console.log(this.props.user)
+      this.props.sendVote(id, this.props.user.jwt);
     };
   }
   componentWillMount() {
@@ -63,7 +64,8 @@ Poll.propTypes = {
   location: PropTypes.object.isRequired,
   poll: PropTypes.object.isRequired,
   fetchPoll: PropTypes.func.isRequired,
-  sendVote: PropTypes.func.isRequired
+  sendVote: PropTypes.func.isRequired,
+  user: PropTypes.object.isRequired
 };
 
 export default Poll;

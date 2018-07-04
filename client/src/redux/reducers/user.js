@@ -19,20 +19,24 @@ const user = (
         err: false
       });
     case "SIGNIN_SUCCESS":
-    console.log(action.jwt)
+      // console.log(action.jwt)
       return Object.assign({}, state, {
         signedIn: true,
         signingIn: false,
         jwt: action.jwt,
-        err: false
+        err: false,
+        usernameInput: "",
+        passwordInput: ""
       });
     case "SIGNIN_FAIL":
-    console.log(action.err)
+      // console.log(action.err)
       return Object.assign({}, state, {
         signedIn: false,
         signingIn: false,
         jwt: undefined,
-        err: action.err
+        err: action.err,
+        usernameInput: "",
+        passwordInput: ""
       });
     case "LOGOUT":
       return Object.assign({}, state, {

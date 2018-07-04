@@ -70,6 +70,7 @@ app.post(
   "/api/vote/:optionId",
   passport.authenticate("jwt", { session: false }),
   (req, res) => {
+    console.log("reached")
     vote(req, res);
   }
 );
