@@ -1,14 +1,17 @@
-const user = (
-  state = {
-    signedIn: false,
-    signingIn: false,
-    jwt: undefined,
-    err: false,
-    usernameInput: "",
-    passwordInput: ""
-  },
-  action
-) => {
+import cookieParser from "./../../functions/cookie-parser";
+
+let jwt = cookieParser(document.cookie).user;
+
+let initialState = {
+  signedIn: Boolean(jwt),
+  signingIn: false,
+  jwt: jwt,
+  err: false,
+  usernameInput: "",
+  passwordInput: ""
+};
+
+const user = (state = initialState, action) => {
   switch (action.type) {
     case "SIGNIN_REQUEST":
       // console.log("signin_request");
@@ -19,7 +22,8 @@ const user = (
         err: false
       });
     case "SIGNIN_SUCCESS":
-      // console.log(action.jwt)
+      // console.log(action.jwt);
+      document.cookie = `user=${action.jwt.token}`;
       return Object.assign({}, state, {
         signedIn: true,
         signingIn: false,
@@ -29,7 +33,7 @@ const user = (
         passwordInput: ""
       });
     case "SIGNIN_FAIL":
-      // console.log(action.err)
+      document.cookie = "user=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/";
       return Object.assign({}, state, {
         signedIn: false,
         signingIn: false,
@@ -39,6 +43,7 @@ const user = (
         passwordInput: ""
       });
     case "LOGOUT":
+      document.cookie = "user=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/";
       return Object.assign({}, state, {
         signedIn: false,
         signingIn: false,

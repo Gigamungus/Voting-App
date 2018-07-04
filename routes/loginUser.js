@@ -2,13 +2,16 @@ const Voter = require("./../Schemas/VoterSchema");
 const bcrypt = require("bcryptjs");
 const secret = require("./../config/passwords").secret;
 const jwt = require("jsonwebtoken");
+const cookie = require("cookie");
 
 const loginUser = (req, res) => {
-  console.log(req.body);
-  res.set("Access-Control-Allow-Origin", "*");
+//   console.log(req.headers.cookie);
+  //   console.log(req.body);
+  //   console.log(req.cookies);
+  //   res.set("Access-Control-Allow-Origin", "*");
   Voter.findOne({ username: req.body.username }).exec((err, voter) => {
     if (err) {
-    //   console.log("here");
+      //   console.log("here");
       res.json(err);
     } else if (!voter) {
       //bad username
@@ -23,7 +26,20 @@ const loginUser = (req, res) => {
           //   console.log(new Object(voter));
           jwt.sign(voter._doc, secret, (err, token) => {
             if (err) console.log(err);
-            else res.status(200).json({ token });
+            else {
+              //   console.log("here");
+              //   console.log(String(token));
+            //   res.setHeader(
+            //     "Set-Cookie",
+            //     cookie.serialize("jwt", String(token), {
+            //       maxAge: 60 * 60 * 24 * 365.25,
+            //       expires: 60 * 60 * 24 * 365.25
+            //     })
+            //   );
+              console.log("here");
+              //   res.set("something", "nothing")
+              res.status(200).json({ token });
+            }
           });
         }
       });

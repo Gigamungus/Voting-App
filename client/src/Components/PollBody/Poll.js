@@ -4,6 +4,7 @@ import LoadSpinner from "../LoadSpinner/LoadSpinner";
 import "./Poll.css";
 import Button from "../Button/Button";
 import CopyToClipBoard from "../CopyToClipBoard/CopyToClipBoard";
+import { Link } from "react-router-dom";
 // import { host } from "./../../../../config";
 
 class Poll extends Component {
@@ -16,7 +17,7 @@ class Poll extends Component {
   castVote(id) {
     return () => {
       // store.getState();
-      console.log(this.props.user)
+      console.log(this.props.user);
       this.props.sendVote(id, this.props.user.jwt);
     };
   }
@@ -32,9 +33,21 @@ class Poll extends Component {
     this.getPollIfNeeded();
     // console.log(this.props.poll.poll.options);
     // console.log(this.props.location);
+    const loginReq = this.props.user.signedIn ? (
+      ""
+    ) : (
+      <p style={{ textAlign: "center" }}>
+        you must be{" "}
+        <Link to="/login">
+          <span style={{ color: "steelblue" }}>signed in</span>
+        </Link>{" "}
+        to vote on this poll
+      </p>
+    );
     const renderThis =
       this.props.poll.loaded === true ? (
         <div className="Poll">
+          {loginReq}
           <p className="poll-name">{this.props.poll.poll.name}</p>
           {this.props.poll.poll.options.map((option, index) => {
             /* console.log(option); */

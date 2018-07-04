@@ -12,7 +12,8 @@ const Input = ({
   onChange
 }) => {
   const errorStyle = {
-    display: errorMessage ? "block" : "none"
+    display: errorMessage ? "block" : "none",
+    textAlign: "center"
   };
   return (
     <div className="Input">

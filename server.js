@@ -6,6 +6,7 @@ const authStrat = require("./auth_strategies/jwt-strat");
 const bodyParser = require("body-parser");
 const passport = require("passport");
 const cors = require("cors");
+const cookieParser = require("cookie-parser");
 const port = 5000;
 
 app.use(cors());
@@ -28,6 +29,9 @@ app.use(express.json());
 app.use(passport.initialize());
 app.use(passport.session());
 passport.use(authStrat);
+
+//cookie middleware
+app.use(cookieParser());
 
 //database
 mongoose.connect(
@@ -62,6 +66,7 @@ app.post("/api/createuser", (req, res) => {
 //public route for logging a user in
 app.post("/api/login", (req, res) => {
   // console.log("here");
+  // // console.log(req.cookies);
   loginUser(req, res);
 });
 
@@ -70,7 +75,6 @@ app.post(
   "/api/vote/:optionId",
   passport.authenticate("jwt", { session: false }),
   (req, res) => {
-    console.log("reached")
     vote(req, res);
   }
 );

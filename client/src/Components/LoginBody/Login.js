@@ -4,6 +4,7 @@ import "./Login.css";
 import { Link } from "react-router-dom";
 import Button from "../Button/Button";
 import PropTypes from "prop-types";
+import LoadSpinner from "../LoadSpinner/LoadSpinner";
 
 const Login = ({ user, signin, usernameInput, passwordInput }) => {
   // console.log(user);
@@ -11,6 +12,13 @@ const Login = ({ user, signin, usernameInput, passwordInput }) => {
     e.preventDefault();
     // console.log(e.target[0].value, e.target[1].value);
     signin(e.target[0].value, e.target[1].value);
+  }
+  if (user.signingIn) {
+    return <LoadSpinner />;
+  }
+  let error;
+  if (user.err) {
+    error = user.err.error;
   }
   return (
     <div className="Login">
@@ -21,6 +29,7 @@ const Login = ({ user, signin, usernameInput, passwordInput }) => {
           value={user.usernameInput}
           // value="qw"
           onChange={usernameInput}
+          errorMessage={error}
         />
         <Input
           placeholder="Password"
