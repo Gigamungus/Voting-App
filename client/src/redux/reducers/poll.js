@@ -13,6 +13,8 @@ const poll = (
   action
 ) => {
   switch (action.type) {
+    case "USER_VOTED":
+      return Object.assign({}, state, { userVoted: true });
     case "GET_POLL_REQUEST":
       //   console.log("get_poll_request");
       return Object.assign({}, state, { loading: true, loaded: false });

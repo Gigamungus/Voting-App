@@ -49,6 +49,10 @@ export const fetchPoll = id => {
   };
 };
 
+export const userVoted = () => ({
+  type: "USER_VOTED"
+});
+
 //voting acion creators
 export const sendVoteRequest = id => ({
   type: "SEND_VOTE_REQUEST",
@@ -69,9 +73,15 @@ export const sendVote = (id, jwt) => {
     })
       .then(response => response.json())
       .then(data => {
-        console.log(data);
-        
-        dispatch(voted(data));
+        // console.log(data);
+        if (data.error) {
+          if (data.error === "user voted on this poll") {
+            dispatch(userVoted());
+          }
+        } else {
+          dispatch(userVoted());
+          dispatch(voted(data));
+        }
       });
   };
 };
