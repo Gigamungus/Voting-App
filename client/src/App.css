@@ -6,6 +6,22 @@ body {
   min-height: 100vh
 }
 
+button {
+  background-color: transparent;
+  border: none;
+  outline: none;
+  color: inherit;
+  font-size: inherit;
+  font-family: inherit;
+  text-decoration: inherit;
+  height: inherit;
+  width: inherit;
+}
+
+button:hover {
+  cursor: inherit;
+}
+
 a {
   color: white;
   text-decoration: none;

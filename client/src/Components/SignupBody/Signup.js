@@ -13,10 +13,12 @@ const Signup = ({
   signupPassword1Input,
   signupPassword2Input,
   createUser,
-  passwordMismatch
+  passwordMismatch,
+  isLoggedIn
 }) => {
   let nameError;
   let passwordError;
+  if (isLoggedIn) return <Redirect to="/" />
   if (signupState.timeToRedirect) return <Redirect to="/login" />;
   if (signupState.nameTaken) nameError = "username taken";
   if (signupState.passwordError) passwordError = signupState.passwordError;
@@ -72,7 +74,8 @@ Signup.proptypes = {
   signup: PropTypes.object.isRequired,
   signupUsernameInput: PropTypes.func.isRequired,
   signupPassword1Input: PropTypes.func.isRequired,
-  signupPassword2Input: PropTypes.func.isRequired
+  signupPassword2Input: PropTypes.func.isRequired,
+  isLoggedIn: PropTypes.bool.isRequired
 };
 
 export default Signup;

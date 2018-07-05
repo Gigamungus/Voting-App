@@ -9,7 +9,8 @@ import {
 } from "./../../redux/actions";
 
 const mapStateToProps = state => ({
-  signupState: state.signup
+  signupState: state.signup,
+  isLoggedIn: state.user.signedIn
 });
 
 const mapDispatchToProps = dispatch => ({

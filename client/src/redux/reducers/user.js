@@ -42,7 +42,7 @@ const user = (state = initialState, action) => {
         usernameInput: "",
         passwordInput: ""
       });
-    case "LOGOUT":
+    case "LOGOUT_USER":
       document.cookie = "user=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/";
       return Object.assign({}, state, {
         signedIn: false,

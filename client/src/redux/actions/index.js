@@ -203,3 +203,8 @@ export const signupUsernameTaken = () => ({
 export const passwordMismatch = () => ({
   type: "PASSWORD_MISMATCH"
 });
+
+//logout action creator
+export const logout = () => ({
+  type: "LOGOUT_USER"
+});
