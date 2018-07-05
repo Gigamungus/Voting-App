@@ -4,22 +4,24 @@ import LoadSpinner from "../LoadSpinner/LoadSpinner";
 import "./PollThumbNail.css";
 
 class Polls extends Component {
-  getPollsIfNeeded() {
+  getPollsIfNeeded(name) {
     if (
       this.props.polls &&
       this.props.polls.loading === false &&
       this.props.polls.loaded === false
     ) {
-      const name = this.props.location.search
-        .split("?")
-        .map(param => param.split("="))
-        .filter(param => param[0] === "name")[0][1];
+      // console.log(Boolean(name));
       this.props.getPolls(name);
     }
   }
   render() {
+    const name = this.props.location.search
+      .split("?")
+      .map(param => param.split("="))
+      .filter(param => param[0] === "name")[0][1];
+    if (!name) return <p>no name provided</p>;
     // console.log(this.props);
-    this.getPollsIfNeeded();
+    this.getPollsIfNeeded(name);
     // console.log(name);
     // console.log(this.props);
     let renderThis = "test";
