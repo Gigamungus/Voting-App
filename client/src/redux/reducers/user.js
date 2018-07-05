@@ -27,7 +27,7 @@ const user = (state = initialState, action) => {
       return Object.assign({}, state, {
         signedIn: true,
         signingIn: false,
-        jwt: action.jwt,
+        jwt: action.jwt.token,
         err: false,
         usernameInput: "",
         passwordInput: ""

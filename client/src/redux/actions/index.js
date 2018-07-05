@@ -10,9 +10,66 @@ export const removeOption = id => ({
   id
 });
 
-export const resetOptions = () => ({
-  type: "RESET_OPTIONS",
-  id: (nextOptionId += 10)
+export const resetOptions = () => {
+  nextOptionId = 2;
+  return {
+    type: "RESET_OPTIONS"
+  };
+};
+
+export const titleInput = val => ({
+  type: "TITLE_INPUT",
+  val
+});
+
+export const optionInput = (id, val) => ({
+  type: "OPTION_INPUT",
+  id,
+  val
+});
+
+export const createPoll = (e, jwt) => {
+  // console.log(jwt);
+  e.preventDefault();
+  const title = e.target[0].value;
+  let options = [];
+
+  for (let i = 1; i < e.target.length - 3; i += 2) {
+    options.push(e.target[i].value);
+  }
+  options = options.filter(option => option);
+  if (!title || options.length < 2 || options.length > 100)
+    return {
+      type: "CREATE_POLL_ERROR",
+      nameError: !Boolean(title),
+      optionsError: options.length < 2 || options.length > 100
+    };
+
+  let body = { title, options };
+  if (jwt) body.jwt = jwt;
+  return dispatch => {
+    dispatch(creatingPoll());
+    fetch("http://localhost:5000/api/newpoll", {
+      method: "POST",
+      headers: { "content-type": "application/json" },
+      body: JSON.stringify(body)
+    })
+      .then(res => res.json())
+      .then(res => dispatch(createdPoll(res)));
+  };
+};
+
+export const creatingPoll = () => ({
+  type: "CREATING_POLL"
+});
+
+export const createdPoll = pollId => ({
+  type: "CREATED_POLL",
+  pollId
+});
+
+export const resetCreatePollPage = () => ({
+  type: "RESET_CREATE_POLL_PAGE"
 });
 
 //single poll action creators

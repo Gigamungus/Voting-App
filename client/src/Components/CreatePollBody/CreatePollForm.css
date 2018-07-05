@@ -26,6 +26,7 @@
 .new-poll-name {
     width: 100%;
     height: 30px;
+    margin-bottom: 20px;
 }
 
 .voting-options {
