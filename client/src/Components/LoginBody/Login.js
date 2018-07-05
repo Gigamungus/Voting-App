@@ -5,9 +5,13 @@ import { Link } from "react-router-dom";
 import Button from "../Button/Button";
 import PropTypes from "prop-types";
 import LoadSpinner from "../LoadSpinner/LoadSpinner";
+import { Redirect } from "react-router-dom";
 
 const Login = ({ user, signin, usernameInput, passwordInput }) => {
   // console.log(user);
+  if (user.signedIn) {
+    return <Redirect to="/" />;
+  }
   function test(e) {
     e.preventDefault();
     // console.log(e.target[0].value, e.target[1].value);

@@ -1,8 +1,8 @@
 import { connect } from "react-redux";
 import {
   signin,
-  passwordInput,
-  usernameInput
+  loginPasswordInput,
+  loginUsernameInput
 } from "./../../redux/actions/index";
 import Login from "./Login";
 
@@ -12,8 +12,8 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => ({
   signin: (username, password) => dispatch(signin(username, password)),
-  passwordInput: e => dispatch(passwordInput(e)),
-  usernameInput: e => dispatch(usernameInput(e))
+  passwordInput: e => dispatch(loginPasswordInput(e)),
+  usernameInput: e => dispatch(loginUsernameInput(e))
 });
 
 export default connect(

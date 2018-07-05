@@ -141,12 +141,65 @@ export const signin = (username, password) => {
   };
 };
 
-export const usernameInput = e => ({
-  type: "USERNAME_INPUT",
+export const loginUsernameInput = e => ({
+  type: "LOGIN_USERNAME_INPUT",
   input: e.target.value
 });
 
-export const passwordInput = e => ({
-  type: "PASSWORD_INPUT",
+export const loginPasswordInput = e => ({
+  type: "LOGIN_PASSWORD_INPUT",
   input: e.target.value
+});
+
+//signup action creators
+export const signupUsernameInput = e => ({
+  type: "SIGNUP_USERNAME_INPUT",
+  event: e
+});
+
+export const signupPassword1Input = e => ({
+  type: "SIGNUP_PASSWORD_1_INPUT",
+  event: e
+});
+
+export const signupPassword2Input = e => ({
+  type: "SIGNUP_PASSWORD_2_INPUT",
+  event: e
+});
+
+export const createUser = (username, password) => {
+  return dispatch => {
+    dispatch(signupRequest());
+    return fetch("http://localhost:5000/api/createuser", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        username,
+        password
+      })
+    })
+      .then(res => res.json())
+      .then(res => {
+        if (res.error) {
+          if (res.error.userName) dispatch(signupUsernameTaken());
+        } else dispatch(signupResponse(res));
+      });
+  };
+};
+
+export const signupRequest = () => ({
+  type: "SIGNUP_REQUEST"
+});
+
+export const signupResponse = data => ({
+  type: "SIGNUP_RESPONSE",
+  data
+});
+
+export const signupUsernameTaken = () => ({
+  type: "SIGNUP_USERNAME_TAKEN"
+});
+
+export const passwordMismatch = () => ({
+  type: "PASSWORD_MISMATCH"
 });

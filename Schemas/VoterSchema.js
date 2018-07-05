@@ -23,6 +23,10 @@ const voterSchema = Schema({
   createdPolls: {
     type: [{ type: Schema.Types.ObjectId, ref: "polls" }],
     default: []
+  },
+  created: {
+    type: Date,
+    default: Date.now
   }
 });
 

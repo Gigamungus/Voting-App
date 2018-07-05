@@ -1,3 +1,7 @@
 .Signup form .Input {
     margin: 10px 0;
 }
+.Signup .login-link {
+    text-align: center;
+    margin-top: 20px;
+}

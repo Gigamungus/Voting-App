@@ -50,12 +50,12 @@ const user = (state = initialState, action) => {
         jwt: undefined,
         err: false
       });
-    case "USERNAME_INPUT":
+    case "LOGIN_USERNAME_INPUT":
       // console.log(action.input);
       return Object.assign({}, state, {
         usernameInput: action.input
       });
-    case "PASSWORD_INPUT":
+    case "LOGIN_PASSWORD_INPUT":
       // console.log(action.input)
       return Object.assign({}, state, { passwordInput: action.input });
     default:
