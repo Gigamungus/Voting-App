@@ -19,7 +19,9 @@ class Poll extends Component {
     return () => {
       // store.getState();
       // console.log(this.props.user);
-      this.props.sendVote(id, this.props.user.jwt);
+      if (this.props.user.jwt) {
+        this.props.sendVote(id, this.props.user.jwt);
+      }
     };
   }
   componentWillMount() {
