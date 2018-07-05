@@ -1,4 +1,6 @@
 const Poll = require("./../Schemas/PollSchema");
+const Voter = require("./../Schemas/VoterSchema");
+
 const jwt = require("jsonwebtoken");
 const secret = require("./../config/passwords").secret;
 
@@ -10,6 +12,7 @@ const vote = (req, res) => {
     else {
       // console.log(user);
       Poll.findOne({ "options._id": req.params.optionId }, (err, data) => {
+        // console.log(data._id);
         // console.log(user._id === data.voters[0]);
         if (err) res.send(err);
         else {
@@ -21,6 +24,16 @@ const vote = (req, res) => {
             error.error = "user voted on this poll";
             res.json(error);
           } else {
+            // console.log(user._id);
+            Voter.findByIdAndUpdate(
+              user._id,
+              {
+                $push: { votedPolls: data._id }
+              },
+              (err, doc) => {
+                if (err) console.log(err);
+              }
+            );
             data.voters.push(user._id);
             // console.log(data.voters[0] == user._id);
             data.options = data.options.map(option => {

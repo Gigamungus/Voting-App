@@ -21,10 +21,12 @@ const poll = (
 
     case "GET_POLL_RESPONSE":
       // console.log("get_poll_response");
+      // console.log(action)
       return Object.assign({}, state, {
         loading: false,
         loaded: true,
-        poll: action.poll
+        poll: action.poll,
+        userVoted: action.poll.userVoted
       });
 
     case "GET_POLL_ERROR":

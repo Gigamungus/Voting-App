@@ -31,10 +31,11 @@ export const getPollError = err => ({
   err
 });
 
-export const fetchPoll = id => {
+export const fetchPoll = (id, jwt) => {
+  // console.log(id, jwt)
   return dispatch => {
     dispatch(getPollRequest(id));
-    return fetch(`http://localhost:5000/api/poll/${id}`)
+    return fetch(`http://localhost:5000/api/poll/${id}`, { headers: { jwt } })
       .then(
         res => {
           // console.log(res);

@@ -8,7 +8,7 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  fetchPoll: id => dispatch(fetchPoll(id)),
+  fetchPoll: (id, jwt) => dispatch(fetchPoll(id, jwt)),
   sendVote: (optionId, jwt) => dispatch(sendVote(optionId, jwt))
 });
 

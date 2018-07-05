@@ -11,8 +11,9 @@ class Poll extends Component {
   getPollIfNeeded() {
     const id = this.props.location.search.split("?")[1];
     // console.log(id, this.props.poll.loading, this.props.poll.loaded);
+    // console.log(this.props.user.jwt);
     if (this.props.poll.loading === false && this.props.poll.loaded === false)
-      this.props.fetchPoll(id);
+      this.props.fetchPoll(id, this.props.user.jwt);
   }
   castVote(id) {
     return () => {
