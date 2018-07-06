@@ -1,6 +1,7 @@
 const Poll = require("./../Schemas/PollSchema");
 
 const getPolls = (req, res) => {
+  console.log(req.params.name)
   let search = new RegExp(req.params.name, "gi");
   Poll.find({ name: search }).exec((err, polls) => {
     if (err) res.send(err);

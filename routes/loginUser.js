@@ -24,23 +24,38 @@ const loginUser = (req, res) => {
           res.json({ error: "credentials not recognized" });
         } else {
           //   console.log(new Object(voter));
-          jwt.sign(voter._doc, secret, (err, token) => {
-            if (err) res.send(err);
-            else {
-              //   console.log("here");
-              //   console.log(String(token));
-              //   res.setHeader(
-              //     "Set-Cookie",
-              //     cookie.serialize("jwt", String(token), {
-              //       maxAge: 60 * 60 * 24 * 365.25,
-              //       expires: 60 * 60 * 24 * 365.25
-              //     })
-              //   );
-              // console.log("here");
-              //   res.set("something", "nothing")
-              res.status(200).json({ token });
+          // console.log(voter._doc);
+          // console.log(
+          //   Object.assign(
+          //     {},
+          //     { _id: voter._doc._id, username: voter._doc.username }
+          //   )
+          // );
+          jwt.sign(
+            Object.assign(
+              {},
+              { _id: voter._doc._id, username: voter._doc.username }
+            ),
+            secret,
+            (err, token) => {
+              if (err) res.send(err);
+              else {
+                //   console.log("here");
+                //   console.log(String(token));
+                //   res.setHeader(
+                //     "Set-Cookie",
+                //     cookie.serialize("jwt", String(token), {
+                //       maxAge: 60 * 60 * 24 * 365.25,
+                //       expires: 60 * 60 * 24 * 365.25
+                //     })
+                //   );
+                // console.log("here");
+                //   res.set("something", "nothing")
+                // console.log(token);
+                res.status(200).json({ token });
+              }
             }
-          });
+          );
         }
       });
     }
