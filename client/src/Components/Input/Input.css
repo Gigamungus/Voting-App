@@ -9,7 +9,7 @@
     border-radius: 1000px;
     border: none;
     outline: none;
-    background-color: #999999;
+    background-color: #777777;
     color: white;
     text-align: center;
     min-height: 30px;
@@ -18,7 +18,7 @@
 
 .Input-input::placeholder {
     text-align: center;
-    color: #dddddd;
+    color: #eeeeee;
 }
 
 .Input-input:focus {
