@@ -32,7 +32,15 @@ const options = (state = initialState, action) => {
         options: state.options.filter(option => option.id !== action.id)
       });
     case "RESET_OPTIONS":
-      return { title: "", options: [{ id: 0, text: "" }, { id: 1, text: "" }] };
+      return {
+        title: "",
+        options: [{ id: 0, text: "" }, { id: 1, text: "" }],
+        loading: false,
+        nameError: false,
+        optionsError: false,
+        shouldRedirect: false,
+        pollId: undefined
+      };
     case "TITLE_INPUT":
       return Object.assign({}, state, { title: action.val });
     case "OPTION_INPUT":
