@@ -30,4 +30,4 @@ const voterSchema = Schema({
   }
 });
 
-module.exports = Voter = mongoose.model("voter", voterSchema);
+module.exports = Voter = mongoose.model("voters", voterSchema);

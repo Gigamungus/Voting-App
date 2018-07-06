@@ -265,3 +265,30 @@ export const passwordMismatch = () => ({
 export const logout = () => ({
   type: "LOGOUT_USER"
 });
+
+//get user's polls action creators
+export const getMyPolls = jwt => {
+  return dispatch => {
+    dispatch(getMyPollsRequest());
+    return fetch("http://localhost:5000/api/mypolls", {
+      method: "POST",
+      headers: { "content-type": "application/json" },
+      body: JSON.stringify({ jwt })
+    })
+      .then(res => res.json())
+      .then(res => dispatch(getMyPollsResponse(res)));
+  };
+};
+
+export const getMyPollsRequest = () => ({
+  type: "GET_MY_POLLS_REQUEST"
+});
+
+export const getMyPollsResponse = polls => ({
+  type: "GET_MY_POLLS_RESPONSE",
+  polls
+});
+
+export const resetMyPolls = () => ({
+  type: "RESET_MY_POLLS"
+});

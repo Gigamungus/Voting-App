@@ -15,6 +15,7 @@ app.use(cors());
 const createPoll = require("./routes/createPoll");
 const getPoll = require("./routes/getPoll");
 const getPolls = require("./routes/getPolls");
+const getMyPolls = require("./routes/getMyPolls");
 const createUser = require("./routes/createUser");
 const loginUser = require("./routes/loginUser");
 const vote = require("./routes/vote");
@@ -56,6 +57,10 @@ app.get("/api/poll/:id", (req, res) => {
 
 app.get("/api/polls/:name", (req, res) => {
   getPolls(req, res);
+});
+
+app.post("/api/mypolls", (req, res) => {
+  getMyPolls(req, res);
 });
 
 //public route for creating a user

@@ -1,5 +1,5 @@
 .CopyToClipBoard {
-    background-color: #dddddd;
+    background-color: #cccccc;
     width: 40px;
     height: 40px;
     margin: 5px;
@@ -9,9 +9,9 @@
 }
 
 .CopyToClipBoard:hover {
-    background-color: #cccccc;
+    background-color: #bbbbbb;
 }
 
 .CopyToClipBoard:active {
-    background-color: #bbbbbb;
+    background-color: #aaaaaa;
 }

@@ -13,7 +13,7 @@ const Navbar = ({ user, logout }) => {
         <Link to="/">create poll</Link>
       </li>
       <li>
-        <Link to="/login">my polls</Link>
+        <Link to="/mypolls">my polls</Link>
       </li>
       <li>
         <button onClick={logout} style={{ height: "100%", padding: "20px 0" }}>
