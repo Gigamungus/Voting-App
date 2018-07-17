@@ -1,13 +1,19 @@
 import { connect } from "react-redux";
 import Navbar from "./Navbar";
-import { logout } from "./../../redux/actions";
+import { logout, findPollsInput, getPolls } from "./../../redux/actions";
 
-const mapStateToProps = state => ({
-  user: state.user
-});
+const mapStateToProps = state => {
+  // console.log(state.navbar.input);
+  return {
+    user: state.user,
+    findPollsText: state.navbar.input
+  };
+};
 
 const mapDispatchToProps = dispatch => ({
-  logout: () => dispatch(logout())
+  logout: () => dispatch(logout()),
+  findPollsInput: text => dispatch(findPollsInput(text)),
+  getPollsRequest: nameLike => dispatch(getPolls(nameLike))
 });
 
 export default connect(

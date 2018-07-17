@@ -4,7 +4,8 @@ import poll from "./poll";
 import polls from "./polls";
 import user from "./user";
 import signup from "./signup";
-import myPolls from "./myPolls"
+import myPolls from "./myPolls";
+import navbar from "./navbar";
 
 export default combineReducers({
   options,
@@ -12,5 +13,6 @@ export default combineReducers({
   polls,
   user,
   signup,
-  myPolls
+  myPolls,
+  navbar
 });

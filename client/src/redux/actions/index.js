@@ -145,24 +145,37 @@ export const sendVote = (id, jwt) => {
 };
 
 // multiple polls action creators
-export const getPollsRequest = name => ({
-  type: "GET_POLLS_REQUEST",
-  name
+export const findPollsInput = text => ({
+  type: "FIND_POLLS_INPUT",
+  text
+});
+
+export const getPolls = nameLike => {
+  return dispatch => {
+    // console.log(nameLike);
+    dispatch(getPollsRequest());
+    return fetch("http://localhost:5000/api/polls", {
+      method: "POST",
+      headers: { "content-type": "application/json" },
+      body: JSON.stringify({ nameLike })
+    })
+      .then(data => {
+        return data.json();
+      })
+      .then(data => {
+        dispatch(getPollsResponse(data));
+      });
+  };
+};
+
+export const getPollsRequest = () => ({
+  type: "GET_POLLS_REQUEST"
 });
 
 export const getPollsResponse = polls => ({
   type: "GET_POLLS_RESPONSE",
   polls
 });
-
-export const getPolls = name => {
-  return dispatch => {
-    dispatch(getPollsRequest(name));
-    return fetch(`http://localhost:5000/api/polls/${name}`)
-      .then(polls => polls.json())
-      .then(polls => dispatch(getPollsResponse(polls)));
-  };
-};
 
 //login action creators
 export const signinRequest = () => ({

@@ -4,7 +4,6 @@ const polls = (
   state = {
     loading: false,
     loaded: false,
-    name: undefined,
     polls: []
   },
   action
@@ -13,10 +12,10 @@ const polls = (
     case "GET_POLLS_REQUEST":
       return Object.assign({}, state, {
         loading: true,
-        loaded: false,
-        name: action.name
+        loaded: false
       });
     case "GET_POLLS_RESPONSE":
+      console.log(action);
       return Object.assign({}, state, {
         loading: false,
         loaded: true,

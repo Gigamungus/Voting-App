@@ -14,7 +14,8 @@ app.use(cors());
 //route functions
 const createPoll = require("./routes/createPoll");
 const getPoll = require("./routes/getPoll");
-const getPolls = require("./routes/getPolls");
+const getPollsWithRegex = require("./routes/getPolls");
+const getPollsByName = require("./routes/getPollsByName");
 const getMyPolls = require("./routes/getMyPolls");
 const createUser = require("./routes/createUser");
 const loginUser = require("./routes/loginUser");
@@ -56,7 +57,11 @@ app.get("/api/poll/:id", (req, res) => {
 });
 
 app.get("/api/polls/:name", (req, res) => {
-  getPolls(req, res);
+  getPollsWithRegex(req, res);
+});
+
+app.post("/api/polls", (req, res) => {
+  getPollsByName(req, res);
 });
 
 app.post("/api/mypolls", (req, res) => {
