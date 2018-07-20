@@ -11,7 +11,7 @@ class Polls extends Component {
     else if (this.props.polls.loaded === true) {
       let polls = this.props.polls.polls;
       //   console.log(polls)
-      if (polls.length === 0) renderThis = "no results found";
+      if (polls.length === 0 || polls.error) renderThis = "no results found";
       else {
         renderThis = polls.map((poll, index) => (
           <PollThumbNail key={index} poll={poll} />
