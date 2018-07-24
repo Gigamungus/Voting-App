@@ -5,12 +5,14 @@ import {
   signupPassword1Input,
   signupPassword2Input,
   createUser,
-  passwordMismatch
+  passwordMismatch,
+  resetSignupPage
 } from "./../../redux/actions";
 
 const mapStateToProps = state => ({
   signupState: state.signup,
-  isLoggedIn: state.user.signedIn
+  isLoggedIn: state.user.signedIn,
+  nameBadLength: state.signup.signupNameBadLength
 });
 
 const mapDispatchToProps = dispatch => ({
@@ -18,7 +20,8 @@ const mapDispatchToProps = dispatch => ({
   signupPassword1Input: e => dispatch(signupPassword1Input(e)),
   signupPassword2Input: e => dispatch(signupPassword2Input(e)),
   createUser: (username, password) => dispatch(createUser(username, password)),
-  passwordMismatch: () => dispatch(passwordMismatch())
+  passwordMismatch: () => dispatch(passwordMismatch()),
+  resetPage: () => dispatch(resetSignupPage())
 });
 
 export default connect(

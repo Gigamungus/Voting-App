@@ -244,24 +244,31 @@ export const signupPassword2Input = e => ({
 
 export const createUser = (username, password) => {
   return dispatch => {
-    dispatch(signupRequest());
-    return fetch(`${APIPrefix}/api/createuser`, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        username,
-        password
+    if (username.length > 16 || username.length < 2) {
+      dispatch(signupNameBadLength());
+    } else {
+      dispatch(signupRequest());
+      return fetch(`${APIPrefix}/api/createuser`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          username,
+          password
+        })
       })
-    })
-      .then(res => res.json())
-      .then(res => {
-        if (res.error) {
-          if (res.error.userName) dispatch(signupUsernameTaken());
-        } else {
-          console.log(res);
-          dispatch(signupResponse(res));
-        }
-      });
+        .then(res => res.json())
+        .then(res => {
+          if (res.error) {
+            if (res.error.userName) {
+              // console.log(res);
+              dispatch(signupUsernameTaken());
+            }
+          } else {
+            // console.log(res);
+            dispatch(signupResponse(res));
+          }
+        });
+    }
   };
 };
 
@@ -278,8 +285,16 @@ export const signupUsernameTaken = () => ({
   type: "SIGNUP_USERNAME_TAKEN"
 });
 
+export const signupNameBadLength = () => ({
+  type: "SIGNUP_NAME_BAD_LENGTH"
+});
+
 export const passwordMismatch = () => ({
   type: "PASSWORD_MISMATCH"
+});
+
+export const resetSignupPage = () => ({
+  type: "RESET_SIGNUP_PAGE"
 });
 
 //logout action creator
