@@ -48,16 +48,7 @@ class Poll extends Component {
 
     if (this.props.poll.loaded) {
       this.socket.on("votecast", data => {
-        // console.log("something happened");
-        this.props.poll.poll.options = this.props.poll.poll.options.map(
-          option => {
-            // console.log(option, option._id, data.id, option._id === data.id);
-            return option._id === data.id
-              ? Object.assign(option, { count: option.count + 1 })
-              : option;
-          }
-        );
-        this.forceUpdate();
+        this.props.incrementVoteCount(data);
       });
     }
 
@@ -111,7 +102,8 @@ Poll.propTypes = {
   poll: PropTypes.object.isRequired,
   fetchPoll: PropTypes.func.isRequired,
   sendVote: PropTypes.func.isRequired,
-  user: PropTypes.object.isRequired
+  user: PropTypes.object.isRequired,
+  incrementVoteCount: PropTypes.func.isRequired
 };
 
 export default Poll;

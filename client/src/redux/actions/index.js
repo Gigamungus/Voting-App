@@ -116,6 +116,11 @@ export const userVoted = () => ({
   type: "USER_VOTED"
 });
 
+export const incrementVoteCount = id => ({
+  type: "INCREMENT_VOTE_COUNT",
+  id
+});
+
 //voting acion creators
 export const sendVoteRequest = id => ({
   type: "SEND_VOTE_REQUEST",
@@ -146,7 +151,7 @@ export const sendVote = (id, jwt, socket) => {
         } else {
           dispatch(userVoted());
           dispatch(voted(data));
-          socket.emit("votecast", {id});
+          socket.emit("votecast", { id });
         }
       });
   };

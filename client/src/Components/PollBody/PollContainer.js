@@ -1,6 +1,6 @@
 import { connect } from "react-redux";
 import Poll from "./Poll";
-import { fetchPoll, sendVote } from "./../../redux/actions";
+import { fetchPoll, sendVote, incrementVoteCount } from "./../../redux/actions";
 
 const mapStateToProps = state => ({
   poll: state.poll,
@@ -9,7 +9,10 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => ({
   fetchPoll: (id, jwt) => dispatch(fetchPoll(id, jwt)),
-  sendVote: (optionId, jwt, sock) => dispatch(sendVote(optionId, jwt, sock))
+  sendVote: (optionId, jwt, sock) => dispatch(sendVote(optionId, jwt, sock)),
+  incrementVoteCount: data => {
+    dispatch(incrementVoteCount(data));
+  }
 });
 
 export default connect(
