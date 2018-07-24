@@ -7,7 +7,7 @@ const bodyParser = require("body-parser");
 const passport = require("passport");
 const cors = require("cors");
 const cookieParser = require("cookie-parser");
-const port = process.env.PORT || 5000;
+let port = process.env.PORT || 5000;
 
 app.use(cors());
 
@@ -20,6 +20,9 @@ const getMyPolls = require("./routes/getMyPolls");
 const createUser = require("./routes/createUser");
 const loginUser = require("./routes/loginUser");
 const vote = require("./routes/vote");
+
+//serve react
+const path = require("path");
 
 //body middleware
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -34,6 +37,9 @@ passport.use(authStrat);
 
 //cookie middleware
 app.use(cookieParser());
+
+//serve react
+app.use(express.static(path.join(__dirname, "client", "build")));
 
 //database
 mongoose.connect(
@@ -88,6 +94,10 @@ app.post(
     vote(req, res);
   }
 );
+
+app.get("*", (req, res) => {
+  res.sendFile(path.join(__dirname, "client", "build", "index.html"))
+})
 
 app.listen(port, () => {
   console.log(`serving app on port ${port}`);
