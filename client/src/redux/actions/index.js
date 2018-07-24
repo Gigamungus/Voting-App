@@ -136,6 +136,8 @@ export const sendVote = (id, jwt, socket) => {
   // console.log(socket.emit, socket);
   // console.log(id);
   return dispatch => {
+    // dispatch(incrementVoteCount(id))
+
     dispatch(sendVoteRequest(id));
     return fetch(`${APIPrefix}/api/vote/${id}`, {
       method: "POST",

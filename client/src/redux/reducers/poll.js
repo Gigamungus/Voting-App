@@ -47,17 +47,14 @@ const poll = (
         poll: action.data
       });
     case "INCREMENT_VOTE_COUNT":
-      return Object.assign({}, state, {
-        poll: {
-          poll: {
-            options: state.poll.poll.options.map(option => {
-              return option._id === action.id
-                ? Object.assign({}, option, { count: option.count + 1 })
-                : option;
-            })
-          }
-        }
+      let newState = Object.assign({}, state);
+      // console.log("newstate", newState, "newstate");
+      newState.poll.options = newState.poll.options.map(option => {
+        return option._id === action.id
+          ? Object.assign({}, option, { count: option.count + 1 })
+          : option;
       });
+      return newState;
     default:
       return state;
   }

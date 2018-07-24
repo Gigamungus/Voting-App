@@ -37,7 +37,7 @@ class Poll extends Component {
   }
   render() {
     // console.log(window.location);
-    // console.log(this.props);
+    // console.log(this.props.poll.poll);
     this.getPollIfNeeded();
     // console.log(this.props.poll.poll.options);
     // console.log(this.props.location);
