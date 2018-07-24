@@ -1,7 +1,8 @@
 //poll creation option action creators
-const APIPrefix = process.env.DBPrefix || "http://localhost:5000";
-
-console.log(APIPrefix, process.env.DBPrefix, __dirname);
+const APIPrefix =
+  window.location.host === "localhost:3000"
+    ? "http://localhost:5000"
+    : "https://" + window.location.host;
 
 let nextOptionId = 2;
 export const addOption = () => ({
@@ -53,7 +54,7 @@ export const createPoll = (e, jwt) => {
   if (jwt) body.jwt = jwt;
   return dispatch => {
     dispatch(creatingPoll());
-    fetch("http://localhost:5000/api/newpoll", {
+    fetch(`${APIPrefix}/api/newpoll`, {
       method: "POST",
       headers: { "content-type": "application/json" },
       body: JSON.stringify(body)
@@ -96,18 +97,18 @@ export const fetchPoll = (id, jwt) => {
   // console.log(id, jwt)
   return dispatch => {
     dispatch(getPollRequest(id));
-    return fetch(`http://localhost:5000/api/poll/${id}`, { headers: { jwt } })
-      .then(
-        res => {
+    return (
+      fetch(`${APIPrefix}/api/poll/${id}`, { headers: { jwt } })
+        .then(res => {
           // console.log(res);
           return res.json();
-        }
+        })
         // error => {console.log(error)}
-      )
-      .then(poll => {
-        // console.log(poll);
-        dispatch(getPollResponse(poll));
-      });
+        .then(poll => {
+          // console.log(poll);
+          dispatch(getPollResponse(poll));
+        })
+    );
   };
 };
 
@@ -129,7 +130,7 @@ export const voted = data => ({
 export const sendVote = (id, jwt) => {
   return dispatch => {
     dispatch(sendVoteRequest(id));
-    return fetch(`http://localhost:5000/api/vote/${id}`, {
+    return fetch(`${APIPrefix}/api/vote/${id}`, {
       method: "POST",
       headers: { Authorization: `bearer ${jwt}` }
     })
@@ -158,7 +159,7 @@ export const getPolls = nameLike => {
   return dispatch => {
     // console.log(nameLike);
     dispatch(getPollsRequest());
-    return fetch("http://localhost:5000/api/polls", {
+    return fetch(`${APIPrefix}/api/polls`, {
       method: "POST",
       headers: { "content-type": "application/json" },
       body: JSON.stringify({ nameLike })
@@ -199,7 +200,7 @@ export const signinFail = err => ({
 export const signin = (username, password) => {
   return dispatch => {
     dispatch(signinRequest());
-    return fetch("http://localhost:5000/api/login", {
+    return fetch(`${APIPrefix}/api/login`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ username, password })
@@ -244,7 +245,7 @@ export const signupPassword2Input = e => ({
 export const createUser = (username, password) => {
   return dispatch => {
     dispatch(signupRequest());
-    return fetch("http://localhost:5000/api/createuser", {
+    return fetch(`${APIPrefix}/api/createuser`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
@@ -256,7 +257,10 @@ export const createUser = (username, password) => {
       .then(res => {
         if (res.error) {
           if (res.error.userName) dispatch(signupUsernameTaken());
-        } else dispatch(signupResponse(res));
+        } else {
+          console.log(res);
+          dispatch(signupResponse(res));
+        }
       });
   };
 };
@@ -287,7 +291,7 @@ export const logout = () => ({
 export const getMyPolls = jwt => {
   return dispatch => {
     dispatch(getMyPollsRequest());
-    return fetch("http://localhost:5000/api/mypolls", {
+    return fetch(`${APIPrefix}/api/mypolls`, {
       method: "POST",
       headers: { "content-type": "application/json" },
       body: JSON.stringify({ jwt })
