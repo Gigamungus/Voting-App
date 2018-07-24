@@ -5,9 +5,14 @@ import "./Poll.css";
 import Button from "../Button/Button";
 import CopyToClipBoard from "../CopyToClipBoard/CopyToClipBoard";
 import { Link } from "react-router-dom";
+const socketLocation =
+  window.location.host === "localhost:3000"
+    ? "http://localhost:5000"
+    : "https://" + window.location.host;
 // import { host } from "./../../../../config";
 
 class Poll extends Component {
+  socket = window.io.connect(socketLocation);
   getPollIfNeeded() {
     const id = this.props.location.search.split("?")[1];
     // console.log(id, this.props.poll.loading, this.props.poll.loaded);
@@ -15,12 +20,12 @@ class Poll extends Component {
     if (this.props.poll.loading === false && this.props.poll.loaded === false)
       this.props.fetchPoll(id, this.props.user.jwt);
   }
-  castVote(id) {
+  castVote(id, sock) {
     return () => {
       // store.getState();
       // console.log(this.props.user);
       if (this.props.user.jwt) {
-        this.props.sendVote(id, this.props.user.jwt);
+        this.props.sendVote(id, this.props.user.jwt, sock);
       }
     };
   }
@@ -36,6 +41,25 @@ class Poll extends Component {
     this.getPollIfNeeded();
     // console.log(this.props.poll.poll.options);
     // console.log(this.props.location);
+
+    // console.log(this.props.poll.loaded);
+
+    // console.log(this.props.poll.poll.options);
+
+    if (this.props.poll.loaded) {
+      this.socket.on("votecast", data => {
+        // console.log("something happened");
+        this.props.poll.poll.options = this.props.poll.poll.options.map(
+          option => {
+            // console.log(option, option._id, data.id, option._id === data.id);
+            return option._id === data.id
+              ? Object.assign(option, { count: option.count + 1 })
+              : option;
+          }
+        );
+        this.forceUpdate();
+      });
+    }
 
     const userNotes = this.props.user.signedIn ? (
       this.props.poll.userVoted ? (
@@ -64,7 +88,7 @@ class Poll extends Component {
               <div key={index} className="poll-option">
                 <Button
                   text={option.name}
-                  onClick={this.castVote(option._id).bind(this)}
+                  onClick={this.castVote(option._id, this.socket).bind(this)}
                 />
                 <p>{option.count}</p>
               </div>

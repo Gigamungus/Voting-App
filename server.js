@@ -10,6 +10,7 @@ const bodyParser = require("body-parser");
 const passport = require("passport");
 const cors = require("cors");
 const cookieParser = require("cookie-parser");
+const socket = require("socket.io");
 let port = process.env.PORT || 5000;
 
 app.use(cors());
@@ -102,6 +103,19 @@ app.get("*", (req, res) => {
   res.sendFile(path.join(__dirname, "client", "build", "index.html"));
 });
 
-app.listen(port, () => {
+const server = app.listen(port, () => {
   console.log(`serving app on port ${port}`);
+});
+
+const io = socket(server);
+
+io.on("connection", socket => {
+  console.log("new connection", socket.id);
+  socket.on("votecast", data => {
+    console.log("someone voted on " + data.id);
+    socket.broadcast.emit("votecast", data);
+  });
+  socket.on("disconnect", data => {
+    console.log(data);
+  });
 });

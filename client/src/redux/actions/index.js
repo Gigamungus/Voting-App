@@ -127,7 +127,9 @@ export const voted = data => ({
   data
 });
 
-export const sendVote = (id, jwt) => {
+export const sendVote = (id, jwt, socket) => {
+  // console.log(socket.emit, socket);
+  // console.log(id);
   return dispatch => {
     dispatch(sendVoteRequest(id));
     return fetch(`${APIPrefix}/api/vote/${id}`, {
@@ -144,6 +146,7 @@ export const sendVote = (id, jwt) => {
         } else {
           dispatch(userVoted());
           dispatch(voted(data));
+          socket.emit("votecast", {id});
         }
       });
   };

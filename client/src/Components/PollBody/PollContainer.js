@@ -9,7 +9,7 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => ({
   fetchPoll: (id, jwt) => dispatch(fetchPoll(id, jwt)),
-  sendVote: (optionId, jwt) => dispatch(sendVote(optionId, jwt))
+  sendVote: (optionId, jwt, sock) => dispatch(sendVote(optionId, jwt, sock))
 });
 
 export default connect(
