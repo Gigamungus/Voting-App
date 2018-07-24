@@ -1,10 +1,15 @@
 const Voter = require("./../Schemas/VoterSchema");
 const Polls = require("./../Schemas/PollSchema");
 const jwt = require("jsonwebtoken");
-const secret = require("./../config/passwords").secret || undefined;
+const secrets = {
+  secret: process.env.secret || require("./../config/passwords").secret,
+  DBhost: process.env.DBhost || require("./../config/passwords").DBhost
+};
+
+const secret = secrets.secret;
 
 const getMyPolls = (req, res) => {
-  jwt.verify(req.body.jwt, secret || process.env.secret, (err, token) => {
+  jwt.verify(req.body.jwt, secret, (err, token) => {
     if (err) res.send(err);
     else {
       Voter.findById(token._id)

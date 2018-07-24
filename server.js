@@ -1,7 +1,10 @@
 const express = require("express");
 const app = express();
 const mongoose = require("mongoose");
-const secrets = require("./config/passwords") || undefined;
+const secrets = {
+  secret: process.env.secret || require("./config/passwords").secret,
+  DBhost: process.env.DBhost || require("./config/passwords").DBhost
+};
 const authStrat = require("./auth_strategies/jwt-strat");
 const bodyParser = require("body-parser");
 const passport = require("passport");
@@ -43,7 +46,7 @@ app.use(express.static(path.join(__dirname, "client", "build")));
 
 //database
 mongoose.connect(
-  secrets.DBhost || process.env.DBhost,
+  secrets.DBhost,
   () => {
     console.log("connected to db");
   }
@@ -96,8 +99,8 @@ app.post(
 );
 
 app.get("*", (req, res) => {
-  res.sendFile(path.join(__dirname, "client", "build", "index.html"))
-})
+  res.sendFile(path.join(__dirname, "client", "build", "index.html"));
+});
 
 app.listen(port, () => {
   console.log(`serving app on port ${port}`);

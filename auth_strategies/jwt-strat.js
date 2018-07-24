@@ -1,11 +1,16 @@
 const JwtStrategy = require("passport-jwt").Strategy;
 const ExtractJwt = require("passport-jwt").ExtractJwt;
-const secret = require("./../config/passwords").secret || undefined;
+const secrets = {
+  secret: process.env.secret || require("./../config/passwords").secret,
+  DBhost: process.env.DBhost || require("./../config/passwords").DBhost
+};
+
+const secret = secrets.secret;
 const Voter = require("./../Schemas/VoterSchema");
 
 let opts = {};
 opts.jwtFromRequest = ExtractJwt.fromAuthHeaderAsBearerToken();
-opts.secretOrKey = secret || process.env.secret;
+opts.secretOrKey = secret;
 
 module.exports = strat = new JwtStrategy(opts, (jwt_payload, done) => {
   // console.log(jwt_payload);

@@ -15,7 +15,7 @@ const polls = (
         loaded: false
       });
     case "GET_POLLS_RESPONSE":
-      console.log(action);
+      // console.log(action);
       return Object.assign({}, state, {
         loading: false,
         loaded: true,

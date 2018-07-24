@@ -2,14 +2,19 @@ const Poll = require("./../Schemas/PollSchema");
 const Voter = require("./../Schemas/VoterSchema");
 
 const jwt = require("jsonwebtoken");
-const secret = require("./../config/passwords").secret || undefined;
+const secrets = {
+  secret: process.env.secret || require("./../config/passwords").secret,
+  DBhost: process.env.DBhost || require("./../config/passwords").DBhost
+};
+
+const secret = secrets.secret;
 
 const vote = (req, res) => {
   // console.log(req.headers.authorization);
   let error = { error: {} };
   jwt.verify(
     req.headers.authorization.split(" ")[1],
-    secret || process.env.secret,
+    secret,
     (err, user) => {
       if (err) res.send(err);
       else {

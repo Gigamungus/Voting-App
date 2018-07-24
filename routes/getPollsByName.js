@@ -2,8 +2,8 @@ const Polls = require("./../Schemas/PollSchema");
 
 const getPollsByName = (req, res) => {
   // console.log(req.body);
-  for (let thing in req) console.log(thing);
-  console.log(req.connection.parser);
+  // for (let thing in req) console.log(thing);
+  // console.log(req.connection.parser);
   let error = { error: {} };
   if (req.body.nameLike) {
     Polls.find({}, (err, matches) => {

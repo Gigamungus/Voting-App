@@ -11,7 +11,7 @@ class Login extends Component {
   render() {
     // console.log(user);
     if (this.props.user.signedIn) {
-      console.log(this.props);
+      // console.log(this.props);
       return <Redirect to="/" />;
     }
     function test(e) {
