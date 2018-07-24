@@ -1,6 +1,6 @@
 const Poll = require("./../Schemas/PollSchema");
 const jwt = require("jsonwebtoken");
-const secret = require("./../config/passwords").secret;
+const secret = require("./../config/passwords").secret || undefined;
 const Voter = require("./../Schemas/VoterSchema");
 
 const getPoll = (req, res) => {
@@ -9,7 +9,7 @@ const getPoll = (req, res) => {
   let userData;
   let userVoted = false;
   if (req.headers.jwt) {
-    jwt.verify(req.headers.jwt, secret, (err, data) => {
+    jwt.verify(req.headers.jwt, secret || process.env.secret, (err, data) => {
       // console.log(data, "here");
       if (err) {
         // console.log(err);

@@ -1,13 +1,13 @@
 const express = require("express");
 const app = express();
 const mongoose = require("mongoose");
-const secrets = require("./config/passwords");
+const secrets = require("./config/passwords") || undefined;
 const authStrat = require("./auth_strategies/jwt-strat");
 const bodyParser = require("body-parser");
 const passport = require("passport");
 const cors = require("cors");
 const cookieParser = require("cookie-parser");
-const port = 5000;
+const port = process.env.PORT || 5000;
 
 app.use(cors());
 
@@ -37,7 +37,7 @@ app.use(cookieParser());
 
 //database
 mongoose.connect(
-  secrets.DBhost,
+  secrets.DBhost || process.env.DBhost,
   () => {
     console.log("connected to db");
   }

@@ -1,6 +1,6 @@
 const Voter = require("./../Schemas/VoterSchema");
 const bcrypt = require("bcryptjs");
-const secret = require("./../config/passwords").secret;
+const secret = require("./../config/passwords").secret || undefined;
 const jwt = require("jsonwebtoken");
 const cookie = require("cookie");
 
@@ -36,7 +36,7 @@ const loginUser = (req, res) => {
               {},
               { _id: voter._doc._id, username: voter._doc.username }
             ),
-            secret,
+            secret || process.env.secret,
             (err, token) => {
               if (err) res.send(err);
               else {
