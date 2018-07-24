@@ -1,7 +1,7 @@
 //poll creation option action creators
 const APIPrefix = process.env.DBPrefix || "http://localhost:5000";
 
-console.log(APIPrefix, process.env.DBPrefix);
+console.log(APIPrefix, process.env.DBPrefix, __dirname);
 
 let nextOptionId = 2;
 export const addOption = () => ({
