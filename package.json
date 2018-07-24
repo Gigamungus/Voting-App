@@ -6,7 +6,8 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start-react": "cd ./client && npm run start",
-    "app": "concurrently \"nodemon\" \"npm run start-react\" "
+    "app": "concurrently \"nodemon\" \"npm run start-react\" ",
+    "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false --prefix client && npm run build --prefix client"
   },
   "repository": {
     "type": "git",
