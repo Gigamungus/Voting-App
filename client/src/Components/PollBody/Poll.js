@@ -5,14 +5,24 @@ import "./Poll.css";
 import Button from "../Button/Button";
 import CopyToClipBoard from "../CopyToClipBoard/CopyToClipBoard";
 import { Link } from "react-router-dom";
-const socketLocation =
-  window.location.host === "localhost:3000"
-    ? "http://localhost:5000"
-    : "https://" + window.location.host;
-// import { host } from "./../../../../config";
+import openSocket from "socket.io-client";
 
 class Poll extends Component {
-  socket = window.io.connect(socketLocation);
+  constructor(props) {
+    // console.log("constructing");
+    super(props);
+
+    const socketLocation =
+      window.location.host === "localhost:3000"
+        ? "http://localhost:5000"
+        : "https://" + window.location.host;
+    this.socket = openSocket(socketLocation);
+
+    this.socket.on("votecast", data => {
+      console.log("found", data);
+      this.props.incrementVoteCount(data.id);
+    });
+  }
   getPollIfNeeded() {
     const id = this.props.location.search.split("?")[1];
     // console.log(id, this.props.poll.loading, this.props.poll.loaded);
@@ -32,25 +42,14 @@ class Poll extends Component {
   componentWillMount() {
     this.props.poll.loaded = false;
   }
+  componentWillUnmount() {
+    this.socket.close();
+  }
   componentDidUpdate() {
     // console.log(this.props.poll);
   }
   render() {
-    // console.log(window.location);
-    // console.log(this.props.poll.poll);
     this.getPollIfNeeded();
-    // console.log(this.props.poll.poll.options);
-    // console.log(this.props.location);
-
-    // console.log(this.props.poll.loaded);
-
-    // console.log(this.props.poll.poll.options);
-
-    if (this.props.poll.loaded) {
-      this.socket.on("votecast", data => {
-        this.props.incrementVoteCount(data);
-      });
-    }
 
     const userNotes = this.props.user.signedIn ? (
       this.props.poll.userVoted ? (

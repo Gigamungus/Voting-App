@@ -110,12 +110,15 @@ const server = app.listen(port, () => {
 const io = socket(server);
 
 io.on("connection", socket => {
-  console.log("new connection", socket.id);
+  // console.log("new connection", socket.id);
+  socket.on("disconnect", data => {
+    // console.log(data);
+  });
   socket.on("votecast", data => {
-    console.log("someone voted on " + data.id);
+    // console.log(socket.id + " voted on " + data.id);
     socket.broadcast.emit("votecast", data);
   });
   socket.on("disconnect", data => {
-    console.log(data);
+    // console.log(data);
   });
 });

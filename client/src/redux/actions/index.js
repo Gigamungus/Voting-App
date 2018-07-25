@@ -153,6 +153,7 @@ export const sendVote = (id, jwt, socket) => {
         } else {
           dispatch(userVoted());
           dispatch(voted(data));
+          // console.log(socket.emit);
           socket.emit("votecast", { id });
         }
       });
