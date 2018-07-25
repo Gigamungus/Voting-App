@@ -103,6 +103,7 @@ app.get("*", (req, res) => {
   res.sendFile(path.join(__dirname, "client", "build", "index.html"));
 });
 
+//server/socket stuff
 const server = app.listen(port, () => {
   console.log(`serving app on port ${port}`);
 });
@@ -110,7 +111,8 @@ const server = app.listen(port, () => {
 const io = socket(server);
 
 io.on("connection", socket => {
-  // console.log("new connection", socket.id);
+  console.log("new connection", socket.id);
+  socket.join("")
   socket.on("disconnect", data => {
     // console.log(data);
   });
@@ -119,6 +121,6 @@ io.on("connection", socket => {
     socket.broadcast.emit("votecast", data);
   });
   socket.on("disconnect", data => {
-    // console.log(data);
+    console.log(data);
   });
 });

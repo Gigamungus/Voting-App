@@ -41,6 +41,7 @@ class Poll extends Component {
   }
   componentWillMount() {
     this.props.poll.loaded = false;
+    // console.log(this.props.poll);
   }
   componentWillUnmount() {
     this.socket.close();
@@ -102,7 +103,8 @@ Poll.propTypes = {
   fetchPoll: PropTypes.func.isRequired,
   sendVote: PropTypes.func.isRequired,
   user: PropTypes.object.isRequired,
-  incrementVoteCount: PropTypes.func.isRequired
+  incrementVoteCount: PropTypes.func.isRequired,
+  pollId: PropTypes.string
 };
 
 export default Poll;

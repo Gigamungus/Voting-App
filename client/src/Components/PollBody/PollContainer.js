@@ -2,10 +2,14 @@ import { connect } from "react-redux";
 import Poll from "./Poll";
 import { fetchPoll, sendVote, incrementVoteCount } from "./../../redux/actions";
 
-const mapStateToProps = state => ({
-  poll: state.poll,
-  user: state.user
-});
+const mapStateToProps = state => {
+  // console.log(state.poll.poll._id);
+  return {
+    poll: state.poll,
+    pollId: state.poll.poll._id,
+    user: state.user
+  };
+};
 
 const mapDispatchToProps = dispatch => ({
   fetchPoll: (id, jwt) => dispatch(fetchPoll(id, jwt)),
