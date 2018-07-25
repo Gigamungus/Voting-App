@@ -7,9 +7,13 @@ const getPollsByName = (req, res) => {
   let error = { error: {} };
   if (req.body.nameLike) {
     Polls.find({}, (err, matches) => {
+      // matches = matches.map(match => mat)
       matches = matches.filter(match => {
         // console.log(match);
-        return match.name.indexOf(req.body.nameLike) !== -1;
+        return (
+          match.name.toLowerCase().indexOf(req.body.nameLike.toLowerCase()) !==
+          -1
+        );
       });
       if (err) res.json(err);
       else {

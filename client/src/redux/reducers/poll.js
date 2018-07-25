@@ -48,11 +48,11 @@ const poll = (
         poll: action.data
       });
     case "INCREMENT_VOTE_COUNT":
-      console.log("incrementing vote count");
+      // console.log("incrementing vote count");
       let newState = Object.assign({}, state);
       // console.log("newstate", newState, "newstate");
       newState.poll.options = newState.poll.options.map(option => {
-        if (option._id === action.id) console.log(option.count);
+        // if (option._id === action.id) console.log(option.count);
         return option._id === action.id
           ? Object.assign({}, option, { count: option.count + 1 })
           : option;

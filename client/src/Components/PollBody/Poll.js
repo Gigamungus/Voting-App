@@ -19,7 +19,7 @@ class Poll extends Component {
     this.socket = openSocket(socketLocation);
 
     this.socket.on("votecast", data => {
-      console.log("found", data);
+      // console.log("found", data);
       this.props.incrementVoteCount(data.id);
     });
   }
