@@ -18,6 +18,9 @@ class Poll extends Component {
         : "https://" + window.location.host;
     this.socket = openSocket(socketLocation);
 
+    // this.socket.pollId = this.props.pollId;
+    // console.log(this.socket);
+
     this.socket.on("votecast", data => {
       // console.log("found", data);
       this.props.incrementVoteCount(data.id);

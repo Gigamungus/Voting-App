@@ -112,13 +112,13 @@ const io = socket(server);
 
 io.on("connection", socket => {
   console.log("new connection", socket.id);
-  socket.join("")
-  socket.on("disconnect", data => {
-    // console.log(data);
-  });
+  // console.log(socket.conn.request.headers.referer.split("?")[1]);
+  const room = `${socket.conn.request.headers.referer.split("?")[1]}`;
+  socket.join(room);
+
   socket.on("votecast", data => {
-    // console.log(socket.id + " voted on " + data.id);
-    socket.broadcast.emit("votecast", data);
+    // console.log(socket);
+    socket.to(room).emit("votecast", data);
   });
   socket.on("disconnect", data => {
     console.log(data);
