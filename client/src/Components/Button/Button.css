@@ -11,21 +11,25 @@
     box-shadow: 0 5px #bbbbbb;
     word-wrap: break-word;
 }
-.Button:hover {
+
+.Button-container:hover .Button {
     cursor: pointer;
     position: relative;
     top: 2px;
     box-shadow: 0 3px #bbbbbb;
 }
-.Button:active {
+
+.Button-container:active .Button {
     position: relative;
     top: 5px;
     box-shadow: none;
 }
-.Button > * {
+
+.Button>* {
     display: flex;
     justify-content: center;
 }
+
 .Button i {
     position: relative;
     bottom: 3px;

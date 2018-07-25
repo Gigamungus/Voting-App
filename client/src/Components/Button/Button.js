@@ -2,16 +2,14 @@ import React from "react";
 import PropTypes from "prop-types";
 import "./Button.css";
 
-const Button = ({
-  type,
-  text,
-  onClick
-}) => {
+const Button = ({ type, text, onClick }) => {
   // console.log(text);
   return (
-    <button className="Button" onClick={onClick} type={type} value>
-      {text}
-    </button>
+    <div className="full-width Button-container">
+      <button className="Button" onClick={onClick} type={type} value>
+        {text}
+      </button>
+    </div>
   );
 };
 
