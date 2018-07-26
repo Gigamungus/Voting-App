@@ -111,7 +111,7 @@ const server = app.listen(port, () => {
 const io = socket(server);
 
 io.on("connection", socket => {
-  console.log("new connection", socket.id);
+  // console.log("new connection", socket.id);
   // console.log(socket.conn.request.headers.referer.split("?")[1]);
   const room = `${socket.conn.request.headers.referer.split("?")[1]}`;
   socket.join(room);
@@ -121,6 +121,6 @@ io.on("connection", socket => {
     socket.to(room).emit("votecast", data);
   });
   socket.on("disconnect", data => {
-    console.log(data);
+    // console.log(data);
   });
 });

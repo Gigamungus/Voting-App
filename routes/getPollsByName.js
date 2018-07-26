@@ -7,17 +7,23 @@ const getPollsByName = (req, res) => {
   let error = { error: {} };
   if (req.body.nameLike) {
     Polls.find({}, (err, matches) => {
-      // matches = matches.map(match => mat)
-      matches = matches.filter(match => {
-        // console.log(match);
-        return (
-          match.name.toLowerCase().indexOf(req.body.nameLike.toLowerCase()) !==
-          -1
-        );
-      });
-      if (err) res.json(err);
-      else {
-        res.json(matches);
+      if (matches) {
+        // matches = matches.map(match => mat)
+        matches = matches.filter(match => {
+          // console.log(match);
+          return (
+            match.name
+              .toLowerCase()
+              .indexOf(req.body.nameLike.toLowerCase()) !== -1
+          );
+        });
+        if (err) res.json(err);
+        else {
+          res.json(matches);
+        }
+      } else {
+        error.error.body = "";
+        res.json(error);
       }
     });
   } else {
