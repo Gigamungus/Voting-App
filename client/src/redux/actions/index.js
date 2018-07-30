@@ -121,6 +121,11 @@ export const incrementVoteCount = id => ({
   id
 });
 
+export const setVotingDataWidth = width => ({
+  type: "SET_VOTING_DATA_WIDTH",
+  width
+});
+
 //voting acion creators
 export const sendVoteRequest = id => ({
   type: "SEND_VOTE_REQUEST",

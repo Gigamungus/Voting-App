@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import LoadSpinner from "../LoadSpinner/LoadSpinner";
+import VotingDataContainer from "./../VotingData/VotingDataContainer";
 import "./Poll.css";
 import Button from "../Button/Button";
 import CopyToClipBoard from "../CopyToClipBoard/CopyToClipBoard";
@@ -12,6 +13,7 @@ class Poll extends Component {
     // console.log("constructing");
     super(props);
 
+    this.pollRef = React.createRef();
     const socketLocation =
       window.location.host === "localhost:3000"
         ? "http://localhost:5000"
@@ -46,12 +48,39 @@ class Poll extends Component {
     this.props.poll.loaded = false;
     // console.log(this.props.poll);
   }
+  componentDidMount() {
+    // console.log("found");
+    this.setVotingDataWidthHelper = () => {
+      // console.log("found");
+      this.props.setVotingDataWidth(
+        window.getComputedStyle(this.pollRef.current).width
+      );
+    };
+    window.addEventListener("resize", this.setVotingDataWidthHelper);
+  }
   componentWillUnmount() {
     this.socket.close();
+    window.removeEventListener("resize", this.setVotingDataWidthHelper);
   }
   componentDidUpdate() {
-    // console.log(this.props.poll);
+    // console.log(this.props.votingDataWidth);
+    if (
+      this.props.poll.loaded &&
+      window.getComputedStyle(this.pollRef.current).width !==
+        this.props.votingDataWidth
+    ) {
+      // console.log(
+      //   window.getComputedStyle(this.pollRef.current).width,
+      //   window.getComputedStyle(this.pollRef.current).width !=
+      //     this.props.setVotingDataWidth,
+      //   this.props.votingDataWidth
+      // );
+      this.props.setVotingDataWidth(
+        window.getComputedStyle(this.pollRef.current).width
+      );
+    }
   }
+
   render() {
     this.getPollIfNeeded();
 
@@ -73,7 +102,7 @@ class Poll extends Component {
 
     const renderThis =
       this.props.poll.loaded === true ? (
-        <div className="Poll">
+        <div className="Poll" ref={this.pollRef}>
           {userNotes}
           <p className="poll-name">{this.props.poll.poll.name}</p>
           {this.props.poll.poll.options.map((option, index) => {
@@ -92,6 +121,7 @@ class Poll extends Component {
             <span>copy URL to clipboard</span>
             <CopyToClipBoard text={window.location.href} />
           </div>
+          <VotingDataContainer />
         </div>
       ) : (
         <LoadSpinner />
@@ -107,7 +137,8 @@ Poll.propTypes = {
   sendVote: PropTypes.func.isRequired,
   user: PropTypes.object.isRequired,
   incrementVoteCount: PropTypes.func.isRequired,
-  pollId: PropTypes.string
+  pollId: PropTypes.string,
+  setVotingDataWidth: PropTypes.func
 };
 
 export default Poll;

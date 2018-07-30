@@ -1,17 +1,16 @@
 //used for tracking info about a single poll
+const initialState = {
+  loading: false,
+  loaded: false,
+  loadingVote: false,
+  loadedVote: false,
+  poll: {},
+  err: false,
+  userVoted: false,
+  votingDataWidth: undefined
+};
 
-const poll = (
-  state = {
-    loading: false,
-    loaded: false,
-    loadingVote: false,
-    loadedVote: false,
-    poll: {},
-    err: false,
-    userVoted: false
-  },
-  action
-) => {
+const poll = (state = initialState, action) => {
   switch (action.type) {
     case "USER_VOTED":
       return Object.assign({}, state, { userVoted: true });
@@ -41,11 +40,11 @@ const poll = (
       return Object.assign({}, state, { loadingVote: true });
 
     case "VOTED":
-    // console.log("screwing it all up")
+      // console.log("screwing it all up")
       return Object.assign({}, state, {
         loadingVote: false,
         loadedVote: true,
-        poll: action.data
+        poll: Object.assign({}, action.data, { userVoted: true })
       });
     case "INCREMENT_VOTE_COUNT":
       // console.log("incrementing vote count");
@@ -58,6 +57,8 @@ const poll = (
           : option;
       });
       return newState;
+    case "SET_VOTING_DATA_WIDTH":
+      return Object.assign({}, state, { votingDataWidth: action.width });
     default:
       return state;
   }
