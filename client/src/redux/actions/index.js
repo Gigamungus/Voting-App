@@ -126,6 +126,11 @@ export const setVotingDataWidth = width => ({
   width
 });
 
+export const savePollLocation = location => ({
+  type: "SAVE_POLL_LOCATION",
+  location
+});
+
 //voting acion creators
 export const sendVoteRequest = id => ({
   type: "SEND_VOTE_REQUEST",
@@ -203,9 +208,10 @@ export const signinRequest = () => ({
   type: "SIGNIN_REQUEST"
 });
 
-export const signinSuccess = jwt => ({
+export const signinSuccess = (jwt, pollLocation = undefined) => ({
   type: "SIGNIN_SUCCESS",
-  jwt
+  jwt,
+  pollLocation
 });
 
 export const signinFail = err => ({
@@ -213,7 +219,7 @@ export const signinFail = err => ({
   err
 });
 
-export const signin = (username, password) => {
+export const signin = (username, password, pollLocation = undefined) => {
   return dispatch => {
     dispatch(signinRequest());
     return fetch(`${APIPrefix}/api/login`, {
@@ -227,7 +233,9 @@ export const signin = (username, password) => {
       })
       .then(data => {
         // console.log(data)
-        data.error ? dispatch(signinFail(data)) : dispatch(signinSuccess(data));
+        data.error
+          ? dispatch(signinFail(data))
+          : dispatch(signinSuccess(data, pollLocation));
       });
   };
 };

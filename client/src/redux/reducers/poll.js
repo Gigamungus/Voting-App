@@ -7,7 +7,8 @@ const initialState = {
   poll: {},
   err: false,
   userVoted: false,
-  votingDataWidth: undefined
+  votingDataWidth: undefined,
+  pollLocation: undefined
 };
 
 const poll = (state = initialState, action) => {
@@ -59,6 +60,8 @@ const poll = (state = initialState, action) => {
       return newState;
     case "SET_VOTING_DATA_WIDTH":
       return Object.assign({}, state, { votingDataWidth: action.width });
+    case "SAVE_POLL_LOCATION":
+      return Object.assign({}, state, {pollLocation: action.location});
     default:
       return state;
   }

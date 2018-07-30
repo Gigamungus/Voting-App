@@ -12,6 +12,12 @@ class Navbar extends Component {
     this.props.getPollsRequest(form.target[0].value);
   };
 
+  savePageLocationHelper = () => {
+    this.props.savePageLocation(
+      window.location.pathname + window.location.search
+    );
+  };
+
   findPollsInputHelper = e => {
     this.props.findPollsInput(e.target.value);
   };
@@ -40,7 +46,9 @@ class Navbar extends Component {
           <Link to="/">create poll</Link>
         </li>
         <li>
-          <Link to="/login">sign in</Link>
+          <Link to="/login" onClick={this.savePageLocationHelper.bind(this)}>
+            sign in
+          </Link>
         </li>
       </ul>
     );
@@ -64,7 +72,8 @@ Navbar.propTypes = {
   user: PropTypes.object.isRequired,
   logout: PropTypes.func,
   findPollsText: PropTypes.string.isRequired,
-  findPollsInput: PropTypes.func.isRequired
+  findPollsInput: PropTypes.func.isRequired,
+  savePageLocation: PropTypes.func
 };
 
 export default withRouter(Navbar);

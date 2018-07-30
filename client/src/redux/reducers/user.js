@@ -8,7 +8,8 @@ let initialState = {
   jwt: jwt,
   err: false,
   usernameInput: "",
-  passwordInput: ""
+  passwordInput: "",
+  locationBeforeLogin: undefined
 };
 
 const user = (state = initialState, action) => {
@@ -22,7 +23,7 @@ const user = (state = initialState, action) => {
         err: false
       });
     case "SIGNIN_SUCCESS":
-      // console.log(action.jwt);
+      // console.log(action);
       document.cookie = `user=${action.jwt.token}`;
       return Object.assign({}, state, {
         signedIn: true,
@@ -30,7 +31,8 @@ const user = (state = initialState, action) => {
         jwt: action.jwt.token,
         err: false,
         usernameInput: "",
-        passwordInput: ""
+        passwordInput: "",
+        locationBeforeLogin: action.pollLocation
       });
     case "SIGNIN_FAIL":
       document.cookie = "user=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/";

@@ -12,12 +12,19 @@ class Login extends Component {
     // console.log(user);
     if (this.props.user.signedIn) {
       // console.log(this.props);
-      return <Redirect to="/" />;
+      const redirectLocation = this.props.pollLocation
+        ? this.props.pollLocation
+        : "/";
+      return <Redirect to={redirectLocation} />;
     }
-    function test(e) {
+    function signUserIn(e) {
       e.preventDefault();
       // console.log(e.target[0].value, e.target[1].value);
-      this.props.signin(e.target[0].value, e.target[1].value);
+      this.props.signin(
+        e.target[0].value,
+        e.target[1].value,
+        this.props.pollLocation
+      );
     }
     if (this.props.user.signingIn) {
       return <LoadSpinner />;
@@ -28,7 +35,7 @@ class Login extends Component {
     }
     return (
       <div className="Login">
-        <form action="" onSubmit={test.bind(this)}>
+        <form action="" onSubmit={signUserIn.bind(this)}>
           <Input
             placeholder="Username"
             name="username"
@@ -61,7 +68,8 @@ Login.propTypes = {
   signin: PropTypes.func.isRequired,
   user: PropTypes.object.isRequired,
   usernameInput: PropTypes.func.isRequired,
-  passwordInput: PropTypes.func.isRequired
+  passwordInput: PropTypes.func.isRequired,
+  pollLocation: PropTypes.string
 };
 
 export default Login;

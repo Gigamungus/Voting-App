@@ -4,11 +4,12 @@ import {
   fetchPoll,
   sendVote,
   incrementVoteCount,
-  setVotingDataWidth
+  setVotingDataWidth,
+  savePollLocation
 } from "./../../redux/actions";
 
 const mapStateToProps = state => {
-  // console.log(state.poll.poll._id);
+  // console.log(state.poll.pollLocation);
   return {
     poll: state.poll,
     pollId: state.poll.poll._id,
@@ -21,7 +22,8 @@ const mapDispatchToProps = dispatch => ({
   fetchPoll: (id, jwt) => dispatch(fetchPoll(id, jwt)),
   sendVote: (optionId, jwt, sock) => dispatch(sendVote(optionId, jwt, sock)),
   incrementVoteCount: data => dispatch(incrementVoteCount(data)),
-  setVotingDataWidth: width => dispatch(setVotingDataWidth(width))
+  setVotingDataWidth: width => dispatch(setVotingDataWidth(width)),
+  savePollLocation: location => dispatch(savePollLocation(location))
 });
 
 export default connect(

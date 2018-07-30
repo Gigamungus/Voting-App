@@ -7,11 +7,13 @@ import {
 import Login from "./Login";
 
 const mapStateToProps = state => ({
-  user: state.user
+  user: state.user,
+  pollLocation: state.poll.pollLocation || undefined
 });
 
 const mapDispatchToProps = dispatch => ({
-  signin: (username, password) => dispatch(signin(username, password)),
+  signin: (username, password, pollLocation = undefined) =>
+    dispatch(signin(username, password, pollLocation)),
   passwordInput: e => dispatch(loginPasswordInput(e)),
   usernameInput: e => dispatch(loginUsernameInput(e))
 });

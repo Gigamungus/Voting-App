@@ -44,6 +44,11 @@ class Poll extends Component {
       }
     };
   }
+  savePollLocationHelper() {
+    this.props.savePollLocation(
+      window.location.pathname + window.location.search
+    );
+  }
   componentWillMount() {
     this.props.poll.loaded = false;
     // console.log(this.props.poll);
@@ -93,7 +98,7 @@ class Poll extends Component {
     ) : (
       <p style={{ textAlign: "center" }}>
         you must be{" "}
-        <Link to="/login">
+        <Link to="/login" onClick={this.savePollLocationHelper.bind(this)}>
           <span style={{ color: "steelblue" }}>signed in</span>
         </Link>{" "}
         to vote on this poll
@@ -137,7 +142,8 @@ Poll.propTypes = {
   user: PropTypes.object.isRequired,
   incrementVoteCount: PropTypes.func.isRequired,
   pollId: PropTypes.string,
-  setVotingDataWidth: PropTypes.func
+  setVotingDataWidth: PropTypes.func,
+  savePollLocation: PropTypes.func
 };
 
 export default Poll;
