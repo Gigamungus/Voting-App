@@ -28,6 +28,9 @@ class VotingData extends Component {
     let stdDev = findSTDDEV(data);
     let totalVotes = data.reduce((acc, data) => acc + data, 0);
 
+    let stdDevBeforeSaturation = 4;
+    let zScoreMultiplier = 255 / stdDevBeforeSaturation;
+
     // let xScale = d3.scaleLinear();
     // console.log(findSTDDEV([1,1,1,1,1,10,1]))
 
@@ -57,9 +60,9 @@ class VotingData extends Component {
       .attr("fill", d => {
         const zScore = (d - avg) / stdDev;
         const red =
-          zScore < 0 ? Math.min(255, Math.sqrt(10000 * Math.abs(zScore))) : 0;
+          zScore < 0 ? Math.min(255, zScoreMultiplier * Math.abs(zScore)) : 0;
         const green =
-          zScore > 0 ? Math.min(255, Math.sqrt(10000 * Math.abs(zScore))) : 0;
+          zScore > 0 ? Math.min(255, zScoreMultiplier * Math.abs(zScore)) : 0;
         // const red = 99;
         // const green = 99;
         const blue = 0;
