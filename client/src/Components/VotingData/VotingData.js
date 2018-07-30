@@ -74,7 +74,7 @@ class VotingData extends Component {
       .data(data)
       .enter()
       .append("text")
-      .text(d => ((d / totalVotes) * 100).toFixed(2) + " %")
+      .text(d => `${d} (${((d / totalVotes) * 100).toFixed(1)}  %)`)
       .attr("y", d => yScale(d) - 5)
       .attr("x", (d, i) => xScale((rectWidth + padding) * i))
       .attr("fill", "white");

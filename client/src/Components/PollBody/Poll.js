@@ -113,7 +113,6 @@ class Poll extends Component {
                   text={option.name}
                   onClick={this.castVote(option._id, this.socket).bind(this)}
                 />
-                <p>{option.count}</p>
               </div>
             );
           })}
