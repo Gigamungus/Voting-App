@@ -61,7 +61,13 @@ const poll = (state = initialState, action) => {
     case "SET_VOTING_DATA_WIDTH":
       return Object.assign({}, state, { votingDataWidth: action.width });
     case "SAVE_POLL_LOCATION":
-      return Object.assign({}, state, {pollLocation: action.location});
+      // console.log(action, state);
+      let pollLocation =
+        action.location === "/login" || action.location === "/signup"
+          ? state.pollLocation
+          : action.location;
+      // console.log(pollLocation);
+      return Object.assign({}, state, { pollLocation: pollLocation });
     default:
       return state;
   }

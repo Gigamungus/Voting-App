@@ -23,8 +23,17 @@ const user = (state = initialState, action) => {
         err: false
       });
     case "SIGNIN_SUCCESS":
-      // console.log(action);
+      // console.log(
+      //   action.pollLocation === "/login",
+      //   action.pollLocation == "/login"
+      // );
       document.cookie = `user=${action.jwt.token}`;
+      // console.log(action, state);
+      let pollLocation =
+        action.pollLocation === "/login" || action.pollLocation === "/signup"
+          ? state.locationBeforeLogin
+          : action.pollLocation;
+      // console.log(pollLocation, action);
       return Object.assign({}, state, {
         signedIn: true,
         signingIn: false,
@@ -32,7 +41,7 @@ const user = (state = initialState, action) => {
         err: false,
         usernameInput: "",
         passwordInput: "",
-        locationBeforeLogin: action.pollLocation
+        locationBeforeLogin: pollLocation
       });
     case "SIGNIN_FAIL":
       document.cookie = "user=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/";
